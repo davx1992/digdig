@@ -7,13 +7,6 @@
     <title>DigDig - Worlds Diggers club</title>
     
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map_canvas { height: 100% }
-    </style>
-    
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAS7PxeiwdvgSKqknSSesBjqZk72Pf99Fo&sensor=false">
     </script>
@@ -22,6 +15,11 @@
   
   </head>
   <body onload="initialize()">
-    <div id="map_canvas" style="width:100%; height:100%"></div>
+    <div id="cont-wrapper">
+      <div id="header">
+        
+      </div>
+        <div id="map_canvas" style="width:100%; height:100%"></div>
+    </div>
   </body>
 </html>
