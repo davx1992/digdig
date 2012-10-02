@@ -1,15 +1,13 @@
-<?php include("includes/db.php");?>
+<?php include("includes/db.php"); ?>
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>DigDig - Worlds Diggers club</title>
+    <title>DigDig - Login</title>
     
+    <!-- Stilu pievienosana-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAS7PxeiwdvgSKqknSSesBjqZk72Pf99Fo&sensor=false">
-    </script>
     <script type="text/javascript" src="js/jquery.js"></script>
     
      <!-- FANCYBOX pievienošana-->
@@ -19,18 +17,36 @@
     <!-- END -->
     
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css'>
-    <!--<script type="text/javascript" src="js/mapsInit.js"></script>-->
     <script type="text/javascript" src="js/functions.js"></script>
     
+   
   
   </head>
   <body">
-    <div id="cont-wrapper">
+    <div id="fancy-wrap">
       <div id="header">
-        <img src="img/logo.png" id="logo"></img>
-        <a class="add_button"></a>
+        <h1>Login</h1>
       </div>
+      <div class="fancy-cont">
+        <div class="error"></div>
+      <form action="loginer.php" method="POST" id="login">
+        <div class="fieldset" id="login-form">
+              <div class="input">
+                <label>E-mail</label>
+                <input type="text" name="email"></input>
+              </div>
 
+              <div class="input">
+                <label>Password</label>
+                <input type="password" name="password"></input>
+              </div>
+              <div class="submitter">
+                <input type="submit" value="Login" id="submitLogin"/><br />
+                <a href="signup.php" class="signup-link">Sign up?</a>
+              </div>
+        </div>
+      </form>
+      </div>
     </div>
   </body>
 </html>

@@ -7,5 +7,7 @@ if (!$db)
   }
   
 $db_selected = mysql_select_db('digdig', $db);
+$salt = "22asdas34ff211fssaw21r3f";
 
+session_start();
 ?>
