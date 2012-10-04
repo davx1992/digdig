@@ -30,7 +30,6 @@
     <div id="cont-wrapper">
       <div id="header">
         <img src="img/logo.png" id="logo"></img>
-        <a class="add_button" href="addobject.php">Add object</a>
         <?php include("includes/menu.php"); ?>
         
       </div>
