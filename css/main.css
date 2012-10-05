@@ -19,10 +19,6 @@ input {
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
-#map_canvas {
-    height: 100%;
-}
-
 /* Main styles */
 
 
@@ -113,6 +109,48 @@ input {
 #menu ul li.lastm {
     padding-right: 7px;
     background: url("../img/right-s.png") no-repeat 90px #d6d3d1;
+}
+
+/*   Content  */
+
+#content {
+
+}
+
+#content .leftblock {
+    overflow: hidden;
+    height: 500px;
+    float: left;
+    width: 700px;
+}
+
+#content .rightblock {
+    width: 260px;
+    height: 600px;
+    float: right;
+}
+
+#map_canvas {
+    height: 105%;
+}
+
+#content #leatest {
+    background: #dfdfdf;
+    margin-left:15px;
+    height:400px;
+    margin-right:20px;
+}
+
+#content #leatest #heading {
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    background: #9C9C9C;
+    height: 35px;
+}
+
+#content #leatest #heading p {
+    padding-top:6px;
 }
 
 /*   Login    */

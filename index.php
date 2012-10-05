@@ -21,19 +21,35 @@
     <!-- END -->
     
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css'>
-    <!--<script type="text/javascript" src="js/mapsInit.js"></script>-->
+    <script type="text/javascript" src="js/mapsInit.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
     
   
   </head>
-  <body">
+  <body onload="initialize()">
     <div id="cont-wrapper">
       <div id="header">
         <img src="img/logo.png" id="logo"></img>
         <a class="add_button" href="addobject.php">Add object</a>
         <?php include("includes/menu.php"); ?>
-        
       </div>
+    
+    <div id="content">
+      <div class="leftblock">
+        <div id="map_canvas"></div>
+      </div>
+      <div class="rightblock">
+        <div id="leatest">
+          <div id="heading">
+            <p>Leatest objects</p>
+          </div>
+          <div id="objects-sm">
+            
+          </div>
+        </div>
+      </div>  
+    </div>
+    </div>
       
     </div>
   </body>
