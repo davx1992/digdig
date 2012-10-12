@@ -8,15 +8,20 @@ html {
 }
 
 body {
-    font-family: 'Ubuntu Condensed', sans-serif;
+    font-family: Allan, helvetica, arial, sans-serif;
     height: 100%;
-    margin: 0;
-    padding: 0;
-    background: url("../img/bg.png");
+    background: #ececec url(../img/bg.png);
+    color: #888;
 }
 
 input {
     font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'BenchNine', sans-serif;
+    text-transform: uppercase;
+    color: #444;
 }
 
 /* Main styles */
@@ -26,23 +31,44 @@ input {
 /*   Header   */
 
 #header {
+    position: relative;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100px;
+}
 
+#header-wrap {
+    height: 190px;
+    background: url("../img/header.png") repeat-x bottom center;
 }
 
 #logo {
-    margin: 7px 2px 2px 30px;
+    background: url("../img/logo.png") no-repeat;
+    float: left;
+    height: 67px;
+    width: 160px;
+    margin: 67px 2px 2px -5px;
 }
 
-#cont-wrapper {
-    margin-left:auto;
-    margin-right:auto;
-    width:960px;
-    height:100%;
-    background: #FFFFFF;
-    
-    -moz-box-shadow: 0px 0px 30px 5px #A4A4A4;
-    -webkit-box-shadow: 0px 0px 30px 5px #A4A4A4;
-    box-shadow: 0px 0px 30px 5px #A4A4A4;
+#sociale {
+    height: 140px;
+    top: 187px;
+    left: -69px;
+    position: absolute;
+    width: 70px;
+    background: url(../img/social-desktop.png) no-repeat bottom center;
+}
+
+#sociale ul {
+    margin-top: 8px;
+    list-style: none;
+    display: block;
+    margin-left: 20px;
+}
+
+#sociale ul li {
+    margin-top:3px;
 }
 
 .add_button {
@@ -53,7 +79,7 @@ input {
     text-transform: uppercase;
     margin: 15px 30px 2px 3px;
     float: right;
-    background: url("../img/btn_sprite.png") no-repeat -5px -123px;
+    background: url("../img/btn_sprite.png") no-repeat -5px -124px;
     width: 190px;
     height: 34px;
     cursor: pointer;
@@ -71,14 +97,67 @@ input {
 
 }
 
+/*    FEATURED OBJECTS   */
+
+#featured-objects {
+    height:500px;
+}
+
+.object-small {
+    position: relative;
+    width: 296px;
+    height: 190px;
+    float:left;
+    margin:11px;
+    cursor: pointer;
+}
+
+.object-small img{
+    width: 296px;
+    height: 190px;
+}
+
+.object-small a {
+    position: absolute;
+    top: 0;
+    height: 190px;
+    color:#fff;
+    background: grey;
+    display: none;
+    text-decoration: none;
+}
+
+.object-small a p {
+    padding:10px;
+}
+
+/*    FOOTER   */
+
+#footer-wrap {
+    background: url("../img/footer-line.png") repeat-x top left #E6E5E1;
+    height: 300px;
+    text-shadow: 0 1px #fff;
+}
+
+#footer {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+}
+
+
+
 /*    MENU    */
 
 #menu {
+    background:#d6d3d1;
     margin-top: 10px;
-    height: 40px;
+    height: 35px;
+    margin-bottom:10px;
 }
 
-#menu ul {
+#menu ul#men {
     list-style: none;
     
 }
@@ -94,9 +173,7 @@ input {
     background:#c4c3c2
 }
 
-#menu ul li.lastm:hover {
-    background: url("../img/right-sh.png") no-repeat 90px #c4c3c2;
-}
+
 
 #menu ul li {
 
@@ -106,10 +183,11 @@ input {
     float:left;
 }
 
-#menu ul li.lastm {
-    padding-right: 7px;
-    background: url("../img/right-s.png") no-repeat 90px #d6d3d1;
+#menu ul#profile {
+    list-style: none;
+    float:right;
 }
+
 
 /*   Content  */
 
@@ -117,12 +195,18 @@ input {
 
 }
 
-#content .leftblock {
-    overflow: hidden;
-    height: 500px;
-    float: left;
-    width: 700px;
+#cont-wrapper {
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
+    background: #FFFFFF;
+    /*
+    -moz-box-shadow: 0px 0px 30px 5px #A4A4A4;
+    -webkit-box-shadow: 0px 0px 30px 5px #A4A4A4;
+    box-shadow: 0px 0px 30px 5px #A4A4A4;
+    */
 }
+
 
 #content .rightblock {
     width: 260px;
@@ -130,15 +214,22 @@ input {
     float: right;
 }
 
+#canva-hider {
+    margin-top: -35px;
+    width: 960px;
+    height: 430px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px #2E2F2F;
+}
+
 #map_canvas {
-    height: 105%;
+    height:460px;
 }
 
 #content #leatest {
     background: #dfdfdf;
     margin-left:15px;
     height:400px;
-    margin-right:20px;
 }
 
 #content #leatest #heading {
@@ -153,94 +244,24 @@ input {
     padding-top:6px;
 }
 
-/*   Login    */
+/*    HEADINGS     */
 
-#fancy-wrap #header {
-    position: relative;
-    box-shadow: none;
-    background-color:#057d9f;
-    height: 60px;  
-    border-bottom: 3px solid #FFB300;
+.home-heading {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 25px;
+    font-size: 33px;
+    background: url("../img/div-line.png") repeat-x center center;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
-#fancy-wrap #header h1 {
-    margin-left: 20px;
-    padding: 10px;
-    color: white;
-    font-size: 30px;
+.home-heading span {
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #fff;
 }
 
-#fancy-wrap {
-    height:100%;
-    width: 100%;
-}
-
-.fieldset {
-    width:90%;
-    margin-left:auto;
-    margin-right:auto;
-}
-
-.input {
-    position: relative;
-    height: 30px;
-    width:300px;
-    margin:10px 5px 10px 5px;
-}
-
-.input label {
-    position: absolute;
-    top: 3px;
-}
-
-.input input {
-    float:right;
-    height: 25px;
-    font-size: 14px;
-    padding-left:5px;
-}
-
-.input input:focus {
-    border: 1px solid #FFB300;
-}
-
-#submitLogin {
-    margin-top: 5px;
-    margin-left: 130px;
-    cursor: pointer;
-    font-size: 16px;
-    background: #FFD573;
-    padding: 5px 30px 7px 30px;
-    border: none;
-    color: #216477;
-}
-
-#submitLogin:hover,active {
-    background: #BF9430;
-    
-}
-
-.signup-link {
-    color: #025167;
-    text-decoration: none;
-    font-size: 13px;
-    width: 100px;
-    margin-left: 158px;
-}
-
-.error {
-    height: 20px;
-}
-
-
-/*Izvelnes menu*/
-.popup {
-        background-color: red;
-        border: 1px solid black;
-        width: 300px;
-        height: 300px;
-        position: absolute;
-}
 
 
 

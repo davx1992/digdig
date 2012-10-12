@@ -31,9 +31,18 @@
       <div id="header">
         <img src="img/logo.png" id="logo"></img>
         <?php include("includes/menu.php"); ?>
-        
       </div>
-      
+      <div id="content">
+        <div id="formdiv">
+          <form method="POST" action="" id="addform">
+            <div class="input">
+            <label>Obects name</label>
+            <input type="text" name="name">
+            </div>
+          </form>
+        </div>
+        <?php include("includes/rightside.php"); ?>
+      </div>
     </div>
   </body>
 </html>

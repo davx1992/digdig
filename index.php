@@ -4,7 +4,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>DigDig - Worlds Diggers club</title>
+    <title>DigDig - Worlds Diggers and Archeologist club</title>
     <link rel="shortcut icon" href="/digdig/img/favico.ico" />
     
     
@@ -14,43 +14,103 @@
     </script>
     <script type="text/javascript" src="js/jquery.js"></script>
     
-     <!-- FANCYBOX pievienošana-->
+    <!-- FANCYBOX pievienošana-->
     <script type="text/javascript" src="js/mousewheel.js"></script>
     <script type="text/javascript" src="js/fancybox/jquery.fancybox.js?v=2.1.0"></script>
     <link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox.css?v=2.1.0" media="screen" />
     <!-- END -->
     
+    <!--   Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=BenchNine:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css'>
+    <!-- END -->
+    
+    <!-- Funkcijas -->
     <script type="text/javascript" src="js/mapsInit.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
-    
+    <!-- END -->
   
   </head>
-  <body onload="initialize()">
+  <body onload="initialize();">
+    <div id="header-wrap">
+      <?php include("includes/header.php"); ?>
+    </div>
     <div id="cont-wrapper">
-      <div id="header">
-        <img src="img/logo.png" id="logo"></img>
-        <a class="add_button" href="addobject.php">Add object</a>
-        <?php include("includes/menu.php"); ?>
-      </div>
-    
-    <div id="content">
-      <div class="leftblock">
-        <div id="map_canvas"></div>
-      </div>
-      <div class="rightblock">
-        <div id="leatest">
-          <div id="heading">
-            <p>Leatest objects</p>
-          </div>
-          <div id="objects-sm">
-            
-          </div>
+      <div id="content">
+        <div id="canva-hider">
+          <div id="map_canvas"></div>
         </div>
-      </div>  
+        <div id="featured-objects">
+          <h2 class="home-heading">
+            <span>Labākie objekti</span>
+          </h2>
+          <div class="object-small">
+            <img src="img/dummies/featured-1.jpg"/>
+            <a href="/">
+              <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
+              One morning, when Gregor Samsa woke from troubled dreams,
+              His many legs, pitifully thin compared with the size of
+              the rest of him, waved about</p>
+            </a>
+          </div>
+                    <div class="object-small">
+            <img src="img/dummies/featured-1.jpg"/>
+            <a href="/">
+              <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
+              One morning, when Gregor Samsa woke from troubled dreams,
+              His many legs, pitifully thin compared with the size of
+              the rest of him, waved about</p>
+            </a>
+          </div>
+          <div class="object-small">
+            <img src="img/dummies/featured-1.jpg"/>
+            <a href="/">
+              <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
+              One morning, when Gregor Samsa woke from troubled dreams,
+              His many legs, pitifully thin compared with the size of
+              the rest of him, waved about</p>
+            </a>
+          </div>
+          <div class="object-small">
+            <img src="img/dummies/featured-1.jpg"/>
+            <a href="/">
+              <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
+              One morning, when Gregor Samsa woke from troubled dreams,
+              His many legs, pitifully thin compared with the size of
+              the rest of him, waved about</p>
+            </a>
+          </div>
+          <div class="object-small">
+            <img src="img/dummies/featured-1.jpg"/>
+            <a href="/">
+              <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
+              One morning, when Gregor Samsa woke from troubled dreams,
+              His many legs, pitifully thin compared with the size of
+              the rest of him, waved about</p>
+            </a>
+          </div>
+          <div class="object-small">
+            <img src="img/dummies/featured-1.jpg"/>
+            <a href="/">
+              <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
+              One morning, when Gregor Samsa woke from troubled dreams,
+              His many legs, pitifully thin compared with the size of
+              the rest of him, waved about</p>
+            </a>
+          </div> 
+        </div>
+        <div id="latest-objects">
+          <h2 class="home-heading">
+            <span>Latest objects</span>
+          </h2>
+        </div>
+        <?php //include("includes/rightside.php"); ?>
+      </div>
     </div>
-    </div>
-      
+    <div id="footer-wrap">
+      <div id="footer">
+        
+      </div>
     </div>
   </body>
 </html>

@@ -1,4 +1,17 @@
 $(document).ready(function() {
+      
+      $(".object-small").mouseover(function(){
+            $(this).children("a").fadeIn();      
+      }).mouseleave(function(){
+            $(this).children("a").fadeOut();      
+      });
+      
+      
+      
+      
+      
+      
+      
      
       //fancybokshi
       
@@ -40,10 +53,3 @@ $(document).ready(function() {
               });
        }
        
-      function openMenu(e){
-            $("<div class='popup'>Hi</div>").appendTo("body")
-                .css("left", e.pageX)
-                .css("top", e.pageY)
-                .show();
-            
-      }
