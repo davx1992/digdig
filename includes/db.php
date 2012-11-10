@@ -1,6 +1,6 @@
 <?php
 
-$db = mysql_connect("localhost","davx","Melnis92");
+$db = mysql_connect("localhost","davx","Murafa");
 if (!$db)
   {
   die('Could not connect: ' . mysql_error());
