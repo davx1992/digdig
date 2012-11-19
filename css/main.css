@@ -51,6 +51,18 @@ h1,h2,h3,h4,h5,h6{
     margin: 67px 2px 2px -5px;
 }
 
+#add {
+    margin: 90px 20px 0 0;
+    background: url("../img/plus.png") no-repeat top;
+    float: right;
+    height: 30px;
+    width: 30px;
+}
+
+#add:hover {
+    background: url("../img/plus.png") no-repeat bottom;
+}
+
 #sociale {
     height: 140px;
     top: 187px;
@@ -175,48 +187,56 @@ h1,h2,h3,h4,h5,h6{
     height: 100%;
 }
 
-
-
 /*    MENU    */
 
-#menu {
-    background:#d6d3d1;
-    margin-top: 10px;
-    height: 35px;
-    margin-bottom:10px;
-}
-
-#menu ul#men {
-    list-style: none;
-    
-}
-
-#menu ul li a {
-    padding: 6px 20px 4px 20px;
+#menu-wrap {
+    margin-left: 300px;
     float: left;
+    margin-top: 84px;
+}
+
+ul#menu li {
+    float: left;
+    list-style: none;
+}
+
+ul#menu li a>span {
+    display: block;
+    font-size: 9px;
+    font-weight: lighter;
+    color:#717171;
+}
+
+ul#menu li:hover span {
+    color: #717171;
+}
+
+
+ul#menu li a {
+    display: block;
+    padding: 10px 15px 5px 15px; 
+    font-size: 14px;
     text-decoration: none;
-    color: black;
+    color: #fff;
 }
 
-#menu ul li:hover{
-    background:#c4c3c2
+ul#menu li:hover {
+    background: #2D2F2F;
+    border-bottom: 5px solid #000000;
 }
 
-
-
-#menu ul li {
-
-    height: 35px;
-    background: #d6d3d1;
-    list-style: none;
-    float:left;
+ul#menu li:hover a {
+    color: #FE830B;
 }
 
-#menu ul#profile {
-    list-style: none;
-    float:right;
+ul#menu li.active {
+    background: #2D2F2F;
+    border-bottom: 5px solid #000000;
 }
 
+ul#menu li.active a {
+    color: #FE830B;
+}
 
 /*   Content  */
 

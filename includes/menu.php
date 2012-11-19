@@ -1,14 +1,9 @@
-<div id="menu">
-    <ul id="men">
-      <li><a href="">Home</a></li>
-      <li><a href="">Objects</a></li>
-      <li><a href="">Forum</a></li>
-      <li><a href="">News</a></li>
-      <li class="lastm"><a href="">About us</a></li>
-    </ul>
-    
-    <ul id="profile">
-      <li class="firstm"><a href="">Partners</a></li>
-      <li><a href="">Login</a></li>
+<div id="menu-wrap">
+    <ul id="menu">
+      <li><a href="">Home<span>Welcome</span></a></li>
+      <li><a href="">Objects<span>Explore</span></a></li>
+      <li><a href="">Forum<span>Discuss</span></a></li>
+      <li><a href="">News<span>Read</span></a></li>
+      <li><a href="">About us<span>Get to know</span></a></li>
     </ul>
 </div>

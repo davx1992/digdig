@@ -5,13 +5,7 @@ $(document).ready(function() {
       }).mouseleave(function(){
             $(this).children("a").fadeOut();      
       });
-      
-      
-      
-      
-      
-      
-      
+
      
       //fancybokshi
       
