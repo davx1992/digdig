@@ -56,7 +56,12 @@ $(function() {
 	});
 });
 </script>
-<h3>Custom example</h3>
+<!-- Bilzhu augshuplades skripts -->
+
+<h2 class="home-heading">
+  <span>Pictures</span>
+</h2>
+
 <div id="container">
 	<div id="filelist">No runtime found.</div>
 	<br />
