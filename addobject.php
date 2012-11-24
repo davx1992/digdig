@@ -66,15 +66,19 @@
             
                 <div id="addObject">
                     <form id="addObjectForm"  action="objectsaver.php" method="POST">
-                    <div class="input">
-                        <input type="text" name="name" placeholder="Title" />
+                    <div class="fieldset">
+                        <span class="legend">Main information</span>
+                        <div class="input">
+                            <input type="text" name="name" placeholder="Title" />
+                        </div>
+                        
+                        <div class="input">
+                            <input type="text" name="city" placeholder="City" />
+                        </div>
                     </div>
                     
-                    <div class="input">
-                        <input type="text" name="city" placeholder="City" />
-                    </div>
-                    
-                    <input type="submit" class="submitBtn" value="Next">
+                    <br style="clear:both;"/>
+                    <input type="submit" class="add_button addObj" value="Next">
                         
                     <div class="input text">
                         <label>Description</label>
