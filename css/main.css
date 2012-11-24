@@ -14,7 +14,7 @@ body {
     color: #888;
 }
 
-input {
+input,label {
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
@@ -187,6 +187,44 @@ h1,h2,h3,h4,h5,h6{
     height: 100%;
 }
 
+/*    FORM ELEMENTS  */
+
+.input {
+    margin: 10px 0 20px 10px;
+}
+
+.input input {
+    font-size: 18px;
+    height: 30px;
+    padding: 2px;
+    border: 1px solid #BDBDBD;
+}
+
+.input.text label {
+    padding-bottom: 5px; 
+    color: #1C1D1D;
+}
+
+.input.text:focus {
+    border:none;
+}
+
+.input input:focus {
+    border: 1px solid #F4FA58;
+}
+
+/*    ADD OBJECT  */
+
+#addObjectForm {
+    margin-left: 20px;
+}
+
+#addObject {
+    padding-bottom:20px;
+}
+
+
+
 /*    MENU    */
 
 #menu-wrap {
@@ -249,6 +287,7 @@ ul#menu li.active a {
     margin-right:auto;
     width:960px;
     background: #FFFFFF;
+    position: relative;
     /*
     -moz-box-shadow: 0px 0px 30px 5px #A4A4A4;
     -webkit-box-shadow: 0px 0px 30px 5px #A4A4A4;
@@ -274,6 +313,22 @@ ul#menu li.active a {
 #map_canvas {
     height:460px;
 }
+
+#canva-hider-addobject {
+    right: 0;
+    position: absolute;
+    z-index: 999;
+    margin-right: 30px;
+    width: 400px;
+    height: 260px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px #2E2F2F;
+}
+
+#map_canvas_addobject {
+    height:280px;
+}
+
 
 #content #leatest {
     background: #dfdfdf;
@@ -303,6 +358,20 @@ ul#menu li.active a {
     background: url("../img/div-line.png") repeat-x center center;
     text-align: center;
     margin-bottom: 15px;
+}
+
+.home-heading.main {
+    margin-top:-35px;
+    margin-right: 0;
+    margin-left: 0;
+    background: #1C1D1D;
+    text-align: left;
+}
+
+.home-heading.main span {
+    color: #fff;
+    background: #1C1D1D;
+    margin-left: 20px;
 }
 
 .home-heading span {

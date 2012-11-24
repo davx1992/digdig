@@ -1,5 +1,20 @@
 $(document).ready(function() {
       
+      tinyMCE.init({
+            mode : 'textareas',
+            width: '450',
+            editor_selector : "mceEditorSimple",
+            theme: 'simple'
+      });
+      
+      tinyMCE.init({
+            mode : 'textareas',
+            width: '900',
+            height: '400',
+            editor_selector : "mceEditor",
+            theme: 'advanced'
+      });
+      
       $(".object-small").mouseover(function(){
             $(this).children("a").fadeIn();      
       }).mouseleave(function(){
