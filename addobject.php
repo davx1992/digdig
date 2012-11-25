@@ -29,7 +29,6 @@
     <script type="text/javascript" src="js/mapsInit.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
     <script type="text/javascript" src="js/tiny_mce/tiny_mce.js"></script>
-    <script type="text/javascript" src="js/plupload/plupload.full.js"></script>
     <!-- END -->
   
     <?php
@@ -38,6 +37,7 @@
         ?>
         <!-- Adding clearing script -->
         <script type="text/javascript">
+            var oid = '<?php echo $ob_id ?>'; 
             $(document).ready(function(){
                 $('#addObjWrap').remove();
                 $.get('upload.php',function(data){

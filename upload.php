@@ -1,60 +1,49 @@
 
 <script type="text/javascript">
-// Inizializeju plupload spraudni
-$(function() {
-	var uploader = new plupload.Uploader({
-		runtimes : 'gears,html5,flash,silverlight,browserplus',
-		browse_button : 'pickfiles',
-		container : 'container',
-		max_file_size : '10mb',
-		url : 'uploader.php',
-		flash_swf_url : 'js/plupload/plupload.flash.swf',
-		silverlight_xap_url : 'js/plupload/plupload.silverlight.xap',
-		filters : [
-			{title : "Image files", extensions : "jpg,gif,png"},
-		]
+var gCounter = 0;  //Galeriju skaits
+
+$(document).ready(function(){
+    /* Galeriju un foto pievienoshana */
+    $('.addGallery').click(function(){
+	//$.post('uploader.php?action=addgallery',{object:oid}, function(data) { 
+	//    console.log(data);
+	//    $('.galleryHolder').append('<a href="#gallery/'+data+'" class="galleryDummy"></a>');
+	//	$('.galleryDummy').click(function(){
+	//	    $.fancybox.open({
+	//		href : 'addphotos.php',
+	//		type : 'iframe',
+	//		padding : 5,
+	//		width : 960,
+	//		height : 420,
+	//		padding : 0,
+	//		margin  :50,
+	//		scrolling : 'no',
+	//		autoSize :   false,
+	//	    });
+	//	});
+	//});
+	gCounter++; //Palielinam skaitu;
+	$('.galleryHolder').append('<a href="#gallery/'+gCounter+'" class="galleryDummy"></a>');
+	$('.galleryDummy').click(function(){
+	    $.fancybox.open({
+		href : 'addphotos.php',
+		type : 'iframe',
+		padding : 5,
+		width : 960,
+		height : 550,
+		padding : 0,
+		margin  :50,
+		scrolling : 'no',
+		autoSize :   false,
+	    });
 	});
-
-	uploader.bind('Init', function(up, params) {
-		$('#filelist').html("<div>Current runtime: " + params.runtime + "</div>");
-	});
-
-	$('#uploadfiles').click(function(e) {
-		uploader.start();
-		e.preventDefault();
-	});
-
-	uploader.init();
-
-	uploader.bind('FilesAdded', function(up, files) {
-		$.each(files, function(i, file) {
-			$('#filelist').append(
-				'<div id="' + file.id + '">' +
-				file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' +
-			'</div>');
-		});
-
-		up.refresh(); // Reposition Flash/Silverlight
-	});
-
-	uploader.bind('UploadProgress', function(up, file) {
-		$('#' + file.id + " b").html(file.percent + "%");
-	});
-
-	uploader.bind('Error', function(up, err) {
-		$('#filelist').append("<div>Error: " + err.code +
-			", Message: " + err.message +
-			(err.file ? ", File: " + err.file.name : "") +
-			"</div>"
-		);
-
-		up.refresh(); // Reposition Flash/Silverlight
-	});
-
-	uploader.bind('FileUploaded', function(up, file) {
-		$('#' + file.id + " b").html("100%");
-	});
+	
+        return false;
+    });
+    
+    /* End */    
 });
+
 </script>
 <!-- Bilzhu augshuplades skripts -->
 
@@ -62,10 +51,10 @@ $(function() {
   <span>Pictures</span>
 </h2>
 
-<div id="container">
-	<div id="filelist">No runtime found.</div>
-	<br />
-	<a id="pickfiles" href="#">[Select files]</a>
-	<a id="uploadfiles" href="#">[Upload files]</a>
+<div id="uploadCont">
+    <a class="addGallery" href="#">Add gallery</a>
+    <div class="galleryHolder">
+	
+    </div>
 </div>
 			

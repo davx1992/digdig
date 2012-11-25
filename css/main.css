@@ -24,6 +24,10 @@ h1,h2,h3,h4,h5,h6{
     color: #444;
 }
 
+a {
+    text-decoration: none;
+    color: #1C1D1D;
+}
 /* Main styles */
 
 
@@ -259,6 +263,62 @@ h1,h2,h3,h4,h5,h6{
     padding-top: 20px;
 }
 
+.addGallery {
+    font-family: 'Ubuntu Condensed', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding-left: 18px;
+    background: url('../img/add.png') no-repeat left 1px;
+} 
+
+.addGallery:hover {
+    background: url('../img/add.png') no-repeat left -17px;
+    color:#FE8300;
+}
+
+#uploadCont {
+    margin-top: -15px;
+    margin-left: 20px;
+    min-height: 300px;
+}
+
+.galleryHolder {
+    margin-top: 20px;
+    height: 160px;
+    width: 100%;
+}
+
+.galleryDummy {
+    width:120px;
+    height: 120px;
+    background: #BDBDBD;
+    float:left;
+    margin:5px;
+}
+
+.galleryDummy:hover {
+    background: url('../img/addpics.png') no-repeat center center;
+}
+
+/*  ADD PHOTOS     */
+
+#uploadContainer {
+    height: 100%;
+    background: #fff;
+}
+
+.addWrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+/* FANCYBOX stiles  */
+.fancyHead {
+    background: #F5DA81;
+    margin-bottom:20px;
+}
+
 
 
 /*    MENU    */
@@ -417,6 +477,16 @@ ul#menu li.active a {
     background: #fff;
 }
 
+.fancyHeading {
+    padding-top:11px;
+    padding-bottom: 5px;
+    font-size: 30px;
+    text-align: left;
+}
+
+.fancyHeading span {
+    margin-left: 20px;
+}
 
 
 
