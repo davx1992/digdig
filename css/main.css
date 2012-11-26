@@ -312,6 +312,32 @@ a {
     padding-right: 20px;
 }
 
+#photoHolder {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#photoHolderWrap {
+    z-index: 1;
+    overflow: auto;
+    height: 395px;
+}
+
+.addedPhoto {
+    float:left;
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    background: #D8D8D8;
+}
+
+.addedPhoto img {
+    vertical-align: middle;
+}
+
+.scroll-pane {
+}
+
 
 /* FANCYBOX stiles  */
 .fancyHead {
@@ -319,6 +345,14 @@ a {
     margin-bottom:20px;
 }
 
+.fancyFooter {
+    z-index: 3;
+    background: #F5DA81;
+    position: absolute;
+    bottom:0;
+    height: 55px;
+    width: 100%;
+}
 
 
 /*    MENU    */

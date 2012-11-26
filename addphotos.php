@@ -1,7 +1,9 @@
 <link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css"  media="all" />
 <!-- Pievienoju skriptus  -->
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/plupload/plupload.full.js"></script>
+<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
 <!-- End -->
 
 <!--   Google fonts -->
@@ -17,7 +19,7 @@ $(function() {
 	browse_button : 'pickfiles',
 	container : 'uploadContainer',
 	max_file_size : '10mb',
-	url : 'upload.php',
+	url : 'uploader.php',
 	flash_swf_url : 'js/plupload/plupload.flash.swf',
 	silverlight_xap_url : 'js/plupload/plupload.silverlight.xap',
 	filters : [
@@ -37,13 +39,13 @@ $(function() {
     uploader.init();
 
     uploader.bind('FilesAdded', function(up, files) {
-	$.each(files, function(i, file) {
-	    $('#filelist').append(
-		    '<div id="' + file.id + '">' +
-		    file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' +
-	    '</div>');
-	});
-
+	    $.each(files, function(i, file) {
+		$('#photoHolder').append(
+			'<div id="' + file.id + '" class="addedPhoto"></div>');
+	    });
+	    
+	    uploader.start();
+	    e.preventDefault();
 	    up.refresh(); // Reposition Flash/Silverlight
     });
 
@@ -61,10 +63,19 @@ $(function() {
 	up.refresh(); // Reposition Flash/Silverlight
     });
 
-    uploader.bind('FileUploaded', function(up, file) {
-	$('#' + file.id + " b").html("100%");
+    uploader.bind('FileUploaded', function(up, file, response) {
+	//$('#' + file.id + " b").html("100%");
+	$('#photoHolder').children('#' + file.id).append('<img  src="'+response.response+'" />');
     });
 });
+
+$(document).ready(function(){
+    //Pievienoju jsscrollpane
+    $('.scroll-pane').jScrollPane({
+	autoReinitialise: true
+    }); 
+});
+
 </script>
 
 <div id="uploadContainer">
@@ -74,10 +85,14 @@ $(function() {
         </h3>
     </div>
     <div class="addWrapper">
-	<div id="filelist">No runtime found.</div>
-	<br />
-	<a id="pickfiles" href="#">[Select files]</a>
-	<a id="uploadfiles" href="#">[Upload files]</a>
+	<a id="pickfiles" class="addGallery" href="#">Add photos</a>
+    </div>
+    <div id="photoHolderWrap" class="scroll-pane" style="width:960px;">
+	<div id="photoHolder">
 	</div>
+    </div>
+    <div class="fancyFooter">
+	
+    </div>
 </div>
 		    
