@@ -41,16 +41,17 @@ $(function() {
     uploader.bind('FilesAdded', function(up, files) {
 	    $.each(files, function(i, file) {
 		$('#photoHolder').append(
-			'<div id="' + file.id + '" class="addedPhoto"></div>');
+			'<div id="' + file.id + '" class="addedPhoto"><div class="progressBar"><div class="bar"></div></div></div>');
 	    });
 	    
 	    uploader.start();
-	    e.preventDefault();
+	    //e.preventDefault();
 	    up.refresh(); // Reposition Flash/Silverlight
     });
 
     uploader.bind('UploadProgress', function(up, file) {
-	$('#' + file.id + " b").html(file.percent + "%");
+	//$('#' + file.id + " b").html(file.percent + "%");
+	$('#' + file.id).children('.progressBar').children('.bar').css('width',file.percent+'%');
     });
 
     uploader.bind('Error', function(up, err) {
@@ -83,6 +84,11 @@ $(document).ready(function(){
 	<h3 class="fancyHeading">
             <span>Add photos</span>
         </h3>
+	<div class="galleryNamer">
+	    <form method="post">
+		<input value="United gallery" type="text"></input>
+	    </form>
+	</div>
     </div>
     <div class="addWrapper">
 	<a id="pickfiles" class="addGallery" href="#">Add photos</a>
