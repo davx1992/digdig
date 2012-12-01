@@ -10,7 +10,6 @@
 <link href='http://fonts.googleapis.com/css?family=BenchNine:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css'>
 <!-- END -->
-
 <script type="text/javascript">
 //Inicializeeju plupload
 $(function() {

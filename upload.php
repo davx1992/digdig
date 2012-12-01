@@ -25,8 +25,9 @@ $(document).ready(function(){
 	gCounter++; //Palielinam skaitu;
 	$('.galleryHolder').append('<a href="#gallery/'+gCounter+'" class="galleryDummy"></a>');
 	$('.galleryDummy').click(function(){
+	    var dummie = $(this);
 	    $.fancybox.open({
-		href : 'addphotos.php',
+		href : 'addphotos.php?',
 		type : 'iframe',
 		padding : 5,
 		width : 960,
@@ -35,9 +36,13 @@ $(document).ready(function(){
 		margin  :50,
 		scrolling : 'no',
 		autoSize :   false,
+		afterClose: function() {
+		    $('.galleryHolder').find('[href="'+window.location.hash+'"]').removeClass('galleryDummy').addClass('galleryDummyClicked');
+		    $.post("cleaner.php?deletesession=gallery_id");
+		    window.location.hash = '';
+		}
 	    });
 	});
-	
         return false;
     });
     

@@ -300,6 +300,17 @@ a {
     background: url('../img/addpics.png') no-repeat center center;
 }
 
+.addPhotosLink {
+    top: 155px;
+    position: absolute;
+    left: 360px;    
+}
+
+.addPhotosLink:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 /*  ADD PHOTOS     */
 
 #uploadContainer {
@@ -395,6 +406,35 @@ a {
     width: 100%;
 }
 
+/*    LOGIN   */
+
+#login .input {
+    width: 100%;
+}
+
+#login .input label {
+    position: relative;
+    top: 7px;
+}
+
+#login .input input {
+    float:right;
+}
+
+.signup-link {
+    font-family: 'Ubuntu Condensed', sans-serif;
+    font-size: 14px;
+    float:left;
+    margin: 25px 20px;
+}
+
+#submitLogin {
+    margin-left: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float:left;
+    padding: 5px 10px;
+}
 
 /*    MENU    */
 

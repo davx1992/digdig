@@ -14,6 +14,30 @@ $(document).ready(function() {
           editor_selector : "mceEditor",
           theme: 'advanced'
     });
+    
+	$('.addPhotosLink').click(function(){
+	    var dummie = $(this);
+            $.post("objectsaver.php",$('#addObjectForm').serialize(),function(data){
+                console.log(data);    
+            });
+	    $.fancybox.open({
+		href : 'addphotos.php',
+		type : 'iframe',
+		padding : 5,
+		width : 960,
+		height : 550,
+		padding : 0,
+		margin  :50,
+		scrolling : 'no',
+		autoSize :   false,
+		afterClose: function() {
+                    $('.addObj').attr('onclick','');
+                    dummie.remove();
+		//    $.post("cleaner.php?deletesession=gallery_id");
+		}
+	    });
+            return false;
+        });
 
     $(".object-small").mouseover(function(){
           $(this).children("a").fadeIn();      
@@ -35,24 +59,7 @@ $(document).ready(function() {
          });
     
     //END
-    
-    //login lietas
-    $('#submitLogin').click(function(){
-                var form = $('#login').serialize();
-                $.post('loginer.php',form, function(data) {
-                   if(data.response == false){
-                      $('.error').html(data.error);
-                   }else{
-                      parent.$.fancybox.close();
-                   }
-                });
-                
-                
-          return false
-    });
-    
-    
-    //end
+
 });
     
     function sendAjax(){

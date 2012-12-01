@@ -1,4 +1,4 @@
-<?php include("includes/db.php");?>
+<?php include("includes/db.php"); //print_r($_SESSION);?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,30 +6,12 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>DigDig - Worlds Diggers and Archeologist club</title>
     <link rel="shortcut icon" href="/digdig/img/favico.ico" />
-    
-    
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAS7PxeiwdvgSKqknSSesBjqZk72Pf99Fo&sensor=false">
+    <script type="text/javascript">
+        var url = "<?php echo 'http://localhost/digdig/'?>";
     </script>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    
-    <!-- FANCYBOX pievienošana-->
-    <script type="text/javascript" src="js/mousewheel.js"></script>
-    <script type="text/javascript" src="js/fancybox/jquery.fancybox.js?v=2.1.0"></script>
-    <link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox.css?v=2.1.0" media="screen" />
+    <!-- Pievienojam skriptus -->  
+        <?php include("includes/scripts.php"); ?>
     <!-- END -->
-    
-    <!--   Google fonts -->
-    <link href='http://fonts.googleapis.com/css?family=BenchNine:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css'>
-    <!-- END -->
-    
-    <!-- Funkcijas -->
-    <script type="text/javascript" src="js/mapsInit.js"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
-    <!-- END -->
-  
   </head>
   <body onload="initialize();">
     <div id="header-wrap">
