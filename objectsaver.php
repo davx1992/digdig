@@ -1,4 +1,6 @@
-<?php include("includes/db.php");
+<?php
+    include("includes/db.php");
+    include("includes/authcheck.php");
 
     if(isset($_POST) && !isset($_SESSION['object_id'])){
         $data = $_POST;

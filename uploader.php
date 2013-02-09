@@ -1,5 +1,6 @@
 <?php
 include("includes/db.php");
+include("includes/authcheck.php");
 require_once 'helpers/ThumbLib.inc.php';
     
     //if(isset($_GET['action']) && $_GET['action'] == 'addgallery' ){

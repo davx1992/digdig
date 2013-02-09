@@ -1,5 +1,6 @@
 <?php include("includes/db.php");
-
+//print_r($_SESSION);
+//session_destroy();
   if(isset($_POST) && !empty($_POST)){
     $email = $_POST['email'];
     $passw = sha1($_POST['password'].$salt);

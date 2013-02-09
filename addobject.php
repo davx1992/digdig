@@ -1,4 +1,7 @@
-<?php include("includes/db.php"); session_destroy();?>
+<?php
+    include("includes/db.php");
+    include("includes/authcheck.php");
+?>
 <!DOCTYPE html>
 <html>
   <head>

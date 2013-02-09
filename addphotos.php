@@ -1,3 +1,6 @@
+<?php
+
+?>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css"  media="all" />
 <!-- Pievienoju skriptus  -->
