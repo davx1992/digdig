@@ -8,7 +8,7 @@ html {
 }
 
 body {
-    font-family: Allan, helvetica, arial, sans-serif;
+    font-family: 'Merriweather Sans', sans-serif;
     height: 100%;
     background: #ececec url(../img/bg.png);
     color: #888;
@@ -168,7 +168,7 @@ a {
 /* LATEST OBJECTS */
 
 #latest-wrapper {
-    
+
 }
 
 #latest-objects {
@@ -240,7 +240,7 @@ a {
 }
 
 .input.text label {
-    padding-bottom: 5px; 
+    padding-bottom: 5px;
     color: #1C1D1D;
 }
 
@@ -269,7 +269,7 @@ a {
     text-transform: uppercase;
     padding-left: 18px;
     background: url('../img/add.png') no-repeat left 1px;
-} 
+}
 
 .addGallery:hover {
     background: url('../img/add.png') no-repeat left -17px;
@@ -303,7 +303,7 @@ a {
 .addPhotosLink {
     top: 155px;
     position: absolute;
-    left: 360px;    
+    left: 360px;
 }
 
 .addPhotosLink:hover {
@@ -463,7 +463,7 @@ ul#menu li:hover span {
 
 ul#menu li a {
     display: block;
-    padding: 10px 15px 5px 15px; 
+    padding: 10px 15px 5px 15px;
     font-size: 14px;
     text-decoration: none;
     color: #fff;
@@ -580,6 +580,10 @@ ul#menu li.active a {
     text-align: left;
 }
 
+.home-heading.view {
+    margin-bottom:0;
+}
+
 .home-heading.main span {
     color: #fff;
     background: #1C1D1D;
@@ -603,8 +607,43 @@ ul#menu li.active a {
     margin-left: 20px;
 }
 
+#object-map {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 210px;
+}
 
+#object-map-hider {
+    position: relative;
+    overflow: hidden;
+    height: 185px;
+}
 
+.main-text {
+    border-top: 6px solid #DAD9D5;
+    color: #000000;
+    font-size: 12px;
+    padding: 20px;
+}
+
+.main-text #left-col {
+    width: 700px;
+    padding-right: 10px;
+    line-height: 1.8em;
+    border-right: 1px solid #DAD9D5;
+    float: left;
+}
+
+#main-text #right-col {
+    float:left;
+    width: 250px;
+}
+
+#left-col:first-letter {
+    font-size: 24px;
+    color: #FE8300;
+}
 
 
 
