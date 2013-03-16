@@ -645,5 +645,39 @@ ul#menu li.active a {
     color: #FE8300;
 }
 
+#right-col .gallery a {
+    float: left;
+}
+
+#right-col .gallery img {
+    width: 100px;
+}
+
+.rate-stars {
+    margin-top: 5px;
+    float: right;
+    margin-right: 10px;
+}
+
+.rate-stars .star {
+    background: url('../img/star_off.png') no-repeat center center;
+    width: 32px;
+    height: 32px;
+    margin-left: 5px;
+    cursor: pointer;
+    float: left;
+}
+
+.rate-stars .star.on {
+    background: url('../img/star.png') no-repeat center center;
+}
+
+.rate-stars .star.rated {
+    background: url('../img/star.png') no-repeat center center;
+}
+
+.rate-stars .star.rate {
+    background: url('../img/star.png') no-repeat center center;
+}
 
 

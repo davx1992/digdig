@@ -25,10 +25,33 @@
     $pictures = mysql_query("
         SELECT pictures.*
         FROM pictures
-        WHERE pictures.gallery_id = '".$data['get']['id']."'");
+        WHERE pictures.gallery_id = '".$gallery['id']."'");
 
     while ($picture = mysql_fetch_array($pictures, MYSQL_ASSOC)) {
+        $images[] = $picture;
+    }
 
+    $reitings = mysql_query("
+        SELECT ratings.*
+        FROM ratings
+        WHERE ratings.object_id = '".$data['get']['id']."'");
+    $rate = 0;
+    while ($reiting = mysql_fetch_array($reitings, MYSQL_ASSOC)) {
+        $rate += $reiting['rate'];
+        $ratings[] = $reiting;
+    }
+
+    $rated = false;
+
+    if (!empty($ratings)) {
+        $rate = round($rate/count($ratings));
+        if ($logged) {
+            foreach ($ratings as $r) {
+                if ($r['user_id'] == $_SESSION['User']['id']) {
+                    $rated = true;
+                }
+            }
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -44,6 +67,7 @@
     <script type="text/javascript">
         var url = "<?php echo 'http://localhost/digdig/'?>";
         var coords = <?php echo $coord ?>;
+        var object_id = <?php echo $data['get']['id'] ?>;
     </script>
 </head>
 <body onload="initObjectView(coords);">
@@ -54,6 +78,28 @@
     <div id="content">
         <h2 class="home-heading main view">
             <span><?php echo $object['title']?></span>
+            <div class="rate-stars">
+                <?php for ($i = 0; $i < 5; $i++): ?>
+                    <a class="star" href="#" />
+                <?php endfor ?>
+                <?php if ($rate != 0 && $rated): ?>
+                    <script type="text/javascript">
+                        var rate = <?php echo $rate ?>;
+                        var last = $('.rate-stars .star:last').index();
+                        for (var i = last-rate+1; i <= last; i++) {
+                            $('.rate-stars .star').eq(i).addClass('rated');
+                        }
+                    </script>
+                <?php elseif($rate != 0): ?>
+                    <script type="text/javascript">
+                        var rate = <?php echo $rate ?>;
+                        var last = $('.rate-stars .star:last').index();
+                        for (var i = last-rate+1; i <= last; i++) {
+                            $('.rate-stars .star').eq(i).addClass('rate');
+                        }
+                    </script>
+                <?php endif ?>
+            </div>
         </h2>
         <div id="object-map-hider">
             <div id="object-map">
@@ -65,10 +111,11 @@
                 <?php echo $object['main_text'] ?>
             </div>
             <div id="right-col">
-                <?php
-
-
-                ?>
+                <?php foreach ($images as $k=>$image): ?>
+                    <a rel="gallery_images" href="./uploads/objects/<?php echo $data['get']['id'] ?>/<?php echo $gallery['id'] ?>/<?php echo $image['name'] ?>" class="gallery">
+                        <img src="./uploads/objects/<?php echo $data['get']['id'] ?>/<?php echo $gallery['id'] ?>/<?php echo $image['name'] ?>"/>
+                    </a>
+                <?php endforeach ?>
             </div>
             <br style="clear: both;"/>
         </div>

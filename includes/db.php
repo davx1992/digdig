@@ -11,6 +11,11 @@ $salt = "22asdas34ff211fssaw21r3f";
 
 session_start();
 
+$logged = false;
+if (isset($_SESSION['User'])) {
+    $logged = true;
+}
+
 //Nodroshinamies no mysql injekcijaam
 function secure() {
     $_GET = array_map('trim', $_GET);
@@ -32,4 +37,5 @@ function secure() {
 }
 
 secure();
+include('variables.php');
 ?>
