@@ -237,11 +237,17 @@ a {
     height: 30px;
     padding: 2px;
     border: 1px solid #BDBDBD;
+    float: right;
 }
 
 .input.text label {
     padding-bottom: 5px;
     color: #1C1D1D;
+}
+
+.input label {
+    position: relative;
+    top: 5px;
 }
 
 .input.text:focus {
@@ -680,4 +686,15 @@ ul#menu li.active a {
     background: url('../img/star.png') no-repeat center center;
 }
 
+form {
+    width: 330px;
+    margin-left: 25px;
+}
 
+form #submit {
+    padding: 10px 14px;
+}
+
+form .submitter {
+    padding-top: 15px;
+}

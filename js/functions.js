@@ -103,4 +103,34 @@ $(document).ready(function () {
             $('.result').html(data);
         });
     }
-    
+
+/* Form validation function */
+(function($) {
+    $.fn.validate = function() {
+        $(this).find('input').focus(function(){
+            $(this).siblings('.validation-error').fadeOut(500, function(){
+                $(this).remove();
+            });
+        });
+        var error = 0;
+        $(this).find('input').each(function(){
+            var rule =  $(this).attr('class');
+            switch (rule)
+            {
+                case 'required':
+                    if (!$(this).val()) {
+                        if ($(this).siblings('.validation-error').length == 0){
+                            $(this).parent('.input').append('<div class="validation-error">This field id required.</div>');
+                        }
+                        error = 1;
+                    }
+                    break;
+            }
+        });
+        if (error == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+})(jQuery);
