@@ -2,17 +2,36 @@
 //print_r($_SESSION);
 //session_destroy();
 if (isset($_POST) && !empty($_POST)) {
-    $email = $_POST['email'];
     $passw = sha1($_POST['password'] . $salt);
-    $result = mysql_query("SELECT * FROM users WHERE email = '" . $email . "' AND password = '" . $passw . "'", $db);
-    $user = mysql_fetch_array($result, MYSQL_ASSOC);
-    if ($user) {
-        unset($user['password']);
-        $_SESSION['User'] = $user;
-        header('Location: ' . $_SERVER['HTTP_ORIGIN'] . '/digdig');
-        $_SESSION['message'] = "You succsefuly logged in! Greetings from DigDig!";
-    } else {
-        $error = "Wrong email or password!";
+    $passw_sub = sha1($_POST['password_submit'] . $salt);
+        if ($passw != $passw_sub) {
+            $error['type'] = 'error';
+            $error['text'] = 'Passwords do not match!';
+        }
+    $exist = mysql_query("SELECT * FROM users WHERE email = '" . $_POST['email'] . "'", $db);
+    $exist_email = mysql_fetch_array($exist, MYSQL_ASSOC);
+    if (!isset($error)){
+        if ($exist_email) {
+            $error['type'] = 'error';
+            $error['text'] = 'User with this Email already exists!';
+        } else {
+            $result = mysql_query("INSERT INTO users(`email`, `password`, `name`, `surname`, `activation`, `date`) VALUES ('" . $_POST['email'] . "','" . $passw . "','" . $_POST['name'] . "','" . $_POST['surname'] . "', '" . md5($_POST['email']) . "', '" . date('Y-m-d h:i:s') . "')", $db);
+            if ($result) {
+                $error['type'] = 'success';
+                $error['text'] = 'Succeffuly registred your account! Confirmation email was sent to ' . $_POST['email'] . '.';
+                $to = $_POST['email'];
+                $subject = 'DigDig - verification email';
+                $message = 'You succeffuly registred in DigDig.com!<br />
+                    To activate your account follow this link: <br />'
+                    . '<a href="'. $baseUrl . 'activate.php?email=' . $_POST['email'] . '&key=' . md5($_POST['email']) . '">'
+                    . $baseUrl . 'activate.php?email=' . $_POST['email'] . '&key=' . md5($_POST['email']) . '</a>';
+
+                $headers = "From: noreply@digdig.com \r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                mail($to, $subject, $message, $headers);
+            }
+        }
     }
 }
 
@@ -40,7 +59,15 @@ if (isset($_POST) && !empty($_POST)) {
             <span>Signup</span>
         </h2>
 
-        <div class="error"><?php if (isset($error)) echo $error; ?></div>
+        <?php if (isset($error)): ?>
+        <div class="<?php echo $error['type'] ?>"><span><?php echo $error['text'] ?></span></div>
+            <?php
+                if ($error == 'success') {
+                    header('Location: ' . $_SERVER['HTTP_ORIGIN'] . '/digdig');
+                }
+            ?>
+        <?php endif; ?>
+
         <form action="signup.php" method="post" id="signup">
             <div class="input">
                 <label>Name</label>
@@ -51,20 +78,24 @@ if (isset($_POST) && !empty($_POST)) {
                 <input type="text" name="surname" class="required"/>
             </div>
             <div class="input">
-                <label>email</label>
-                <input type="text" name="surname"  class="required"/>
+                <label>Email</label>
+                <input type="text" name="email" class="required email"/>
             </div>
             <div class="input">
                 <label>Password</label>
-                <input type="password" name="password"  class="required"/>
+                <input type="password" name="password" class="required"/>
+            </div>
+            <div class="input">
+                <label>Repeat password</label>
+                <input type="password" name="password_submit" class="required"/>
             </div>
             <div class="submitter">
-                <input type="submit" value="Login" id="submit"/>
+                <input type="submit" value="Submit" id="submit"/>
             </div>
         </form>
         <script type="text/javascript">
-            $('#submit').click(function(){
-                if (!$('form#signup').validate()){
+            $('#submit').click(function () {
+                if (!$('form#signup').validate()) {
                     return false;
                 }
             });

@@ -115,16 +115,24 @@ $(document).ready(function () {
         var error = 0;
         $(this).find('input').each(function(){
             var rule =  $(this).attr('class');
-            switch (rule)
-            {
-                case 'required':
+            if (typeof rule != 'undefined'){
+                if (rule.indexOf('required') >= 0){
                     if (!$(this).val()) {
                         if ($(this).siblings('.validation-error').length == 0){
-                            $(this).parent('.input').append('<div class="validation-error">This field id required.</div>');
+                            $(this).parent('.input').append('<div class="validation-error"><span>This field id required.</span></div>');
                         }
                         error = 1;
                     }
-                    break;
+                }
+                if(rule.indexOf('email') >= 0) {
+                    var emailReg = /^([\w-]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    if ($(this).val()) {
+                        if (!emailReg.test($(this).val())){
+                            $(this).parent('.input').append('<div class="validation-error"><span>Enter valid Email address.</span></div>');
+                            error = 1;
+                        }
+                    }
+                }
             }
         });
         if (error == 1) {

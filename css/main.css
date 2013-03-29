@@ -233,8 +233,8 @@ a {
 }
 
 .input input {
-    font-size: 18px;
-    height: 30px;
+    font-size: 14px;
+    height: 25px;
     padding: 2px;
     border: 1px solid #BDBDBD;
     float: right;
@@ -242,12 +242,12 @@ a {
 
 .input.text label {
     padding-bottom: 5px;
-    color: #1C1D1D;
 }
 
 .input label {
     position: relative;
     top: 5px;
+    color: #424242;
 }
 
 .input.text:focus {
@@ -697,4 +697,62 @@ form #submit {
 
 form .submitter {
     padding-top: 15px;
+}
+
+.error, .success {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+.success {
+    margin-top: 20px;
+    background-color: #A9F5A9;
+    border: 1px solid #088A08;
+    padding-bottom: 3px;
+}
+
+.validation-error, .error {
+    margin-top: 20px;
+    background-color: #F5A9A9;
+    border: 1px solid #8A0808;
+    padding-bottom: 3px;
+}
+
+.validation-error span, .error span, .success span {
+    padding-left: 15px;
+    font-size: 10px;
+    color: #000000;
+}
+
+/* Overlay */
+.overlay {
+    text-align: center;
+    font-size: 35px;
+    color: #fff;
+    display: none;
+    z-index: 10000;
+    background: url("../img/header.png") repeat-x 20px center;
+    width: 675px;
+    padding: 15px 0 15px 0;
+    border: 1px solid #666;
+    -moz-box-shadow: 0 0 90px 5px #000;
+    -webkit-box-shadow: 0 0 90px #000;
+}
+
+.overlay strong {
+    text-transform: uppercase;
+}
+.overlay p {
+    padding: 15px;
+}
+
+.overlay span {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overlay img {
+    padding: 5px;
+    margin-bottom: -16px;
 }

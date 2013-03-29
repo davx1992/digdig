@@ -6,8 +6,9 @@
         src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAS7PxeiwdvgSKqknSSesBjqZk72Pf99Fo&sensor=false">
     </script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    
-    <!-- FANCYBOX pievienoðana-->
+    <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+
+    <!-- FANCYBOX pievienoï¿½ana-->
     <script type="text/javascript" src="js/mousewheel.js"></script>
     <script type="text/javascript" src="js/fancybox/jquery.fancybox.js?v=2.1.0"></script>
     <link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox.css?v=2.1.0" media="screen" />

@@ -1,10 +1,12 @@
 <?php include("includes/db.php");
-//print_r($_SESSION);
-//session_destroy();
+if (isset($_GET['logout'])) {
+    unset($_SESSION['User']);
+}
+
 if (isset($_POST) && !empty($_POST)) {
     $email = $_POST['email'];
     $passw = sha1($_POST['password'] . $salt);
-    $result = mysql_query("SELECT * FROM users WHERE email = '" . $email . "' AND password = '" . $passw . "'", $db);
+    $result = mysql_query("SELECT * FROM users WHERE email = '" . $email . "' AND password = '" . $passw . "' AND activation = ''", $db);
     $user = mysql_fetch_array($result, MYSQL_ASSOC);
     if ($user) {
         unset($user['password']);
@@ -40,7 +42,10 @@ if (isset($_POST) && !empty($_POST)) {
             <span>Login</span>
         </h2>
 
-        <div class="error"><?php if (isset($error)) echo $error; ?></div>
+        <?php if (isset($error)): ?>
+        <div class="error"><span><?php echo $error ?></span></div>
+        <?php endif; ?>
+
         <form action="login.php" method="post" id="login" style="min-height: 200px;">
             <div class="fieldset" id="login-form">
                 <div class="input">

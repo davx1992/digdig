@@ -33,6 +33,27 @@
     <!-- END -->
 </head>
 <body onload="initialize();">
+
+<!-- Overlay -->
+    <?php if(isset($_SESSION['message'])): ?>
+        <div class="overlay" id="mies1">
+            <p><span> <?php echo $_SESSION['message'] ?></span></p>
+        </div>
+        <script type="text/javascript">
+            jQuery('#mies1').overlay({
+                top: 150,
+                mask: {
+                    loadSpeed: 200,
+                    opacity: 0.5
+                },
+                closeOnClick: true,
+                load: true
+            });
+        </script>
+    <?php unset($_SESSION['message']); ?>
+    <?php endif ?>
+<!-- Overlay end -->
+
 <div id="header-wrap">
     <?php include("includes/header.php"); ?>
 </div>
