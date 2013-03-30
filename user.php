@@ -34,7 +34,8 @@
         </h2>
         <div class="leftcol">
             <ul class="user-menu-list">
-                <li></li>
+                <li class="your-objects active">Your objects</li>
+                <li class="">User information</li>
             </ul>
         </div>
         <div class="maincol">

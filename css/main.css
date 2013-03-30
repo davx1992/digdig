@@ -816,6 +816,25 @@ form .submitter {
     height:360px;
 }
 
+.user-page .user-menu-list li {
+    font-size: 14px;
+    cursor: pointer;
+    background: #6E6E6E;
+    border-right: 5px solid #000;
+    padding: 7px 0 7px 30px;
+    color: #ffffff;
+    border-bottom: 1px solid #848484;
+}
+
+.user-page .user-menu-list li:hover {
+    color: #FE8300;
+}
+
+.user-page .user-menu-list li.active {
+    background: #6E6E6E;
+    border-right: none;
+    color: #FE8300;
+}
 
 
 
