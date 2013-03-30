@@ -450,10 +450,46 @@ a {
     margin-top: 84px;
 }
 
+#menu-wrap.user_menu_wrap {
+    margin-left: 210px;
+}
+
 ul#menu li {
     float: left;
     list-style: none;
 }
+
+ul#menu li.user_menu a {
+    padding-top: 15px;
+    padding-bottom: 12px;
+}
+
+ul#menu li.user_menu {
+    position: relative;
+}
+
+ul#menu li.user_menu:hover {
+    background: #424242;
+    border: none;
+}
+
+/* Level 2*/
+ul#menu li.user_menu ul {
+    display: none;
+    z-index: 999;
+    position: absolute;
+    background: #424242;
+}
+ul#menu li.user_menu ul li:hover {
+    background: #6E6E6E;
+    border: none;
+}
+
+ul#menu li.user_menu ul li {
+    list-style: none;
+    float: none;
+}
+/* END */
 
 ul#menu li a>span {
     display: block;
@@ -756,3 +792,50 @@ form .submitter {
     padding: 5px;
     margin-bottom: -16px;
 }
+
+/* User page */
+
+.user-page #content > div {
+    float: left;
+}
+
+.user-page .leftcol {
+    width: 200px;
+    height: 360px;
+}
+
+.user-page .user-menu-list {
+    list-style: none;
+}
+
+.user-page .maincol {
+    width: 760px;
+}
+
+.user-page #user_map_canvas {
+    height:360px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -228,3 +228,79 @@
             id:coord.object_id
         });
     }
+
+    function initializeUserObjects(id) {
+        var styles = [
+            {
+                "featureType":"water",
+                "stylers":[
+                    { "color":"#6b7176" }
+                ]
+            },
+            {
+                "featureType":"landscape.natural",
+                "stylers":[
+                    { "color":"#ccd0d0" }
+                ]
+            },
+            {
+                "featureType":"road.arterial",
+                "stylers":[
+                    { "color":"#ffffff" }
+                ]
+            },
+            {
+                "featureType":"road.highway",
+                "stylers":[
+                    { "color":"#759f80" }
+                ]
+            },
+            {
+                "featureType":"road.highway",
+                "elementType":"labels.text.stroke",
+                "stylers":[
+                    { "color":"#000000" }
+                ]
+            }
+        ]
+
+        var styledMap = new google.maps.StyledMapType(styles, {name:"Styled Map"});
+
+        var minZoomLevel = 5;
+
+        var mapOptions = {
+            center:new google.maps.LatLng(56.978, 24.093),
+            zoom:8,
+            disableDefaultUI:true,
+            mapTypeControlOptions:{
+                mapTypeIds:[google.maps.MapTypeId.ROADMAP, 'map_style']
+            }
+        };
+        var map = new google.maps.Map(document.getElementById("user_map_canvas"), mapOptions);
+
+        map.mapTypes.set('map_style', styledMap);
+        map.setMapTypeId('map_style');
+
+        // Limitē tuvināšanas līmeni
+        google.maps.event.addListener(map, 'zoom_changed', function () {
+            if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
+        });
+
+        //Pievienojam objektus uz kartes
+        $.getJSON(url + 'markers.php?user=' + id, function (coords) {
+            $.each(coords, function (key, coord) {
+                var image = '/digdig/img/pointer.png';
+                var title = coord.title;
+                var marker = new google.maps.Marker({
+                    position:new google.maps.LatLng(coord.coordx, coord.coordy),
+                    map:map,
+                    title:title,
+                    icon:image,
+                    id:coord.object_id
+                });
+                google.maps.event.addListener(marker,'click', function(e) {
+                    window.location = base + "view.php?id=" + coord.object_id;
+                });
+            });
+        });
+    }

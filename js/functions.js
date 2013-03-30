@@ -8,7 +8,6 @@ $(document).ready(function () {
 
     $('#featured-objects .object-small p:empty' ).remove();
     $('#featured-objects .object-small p').append('...');
-    console.log( $('#featured-objects .object-small p').text());
 
     $('.rate-stars .star').mouseover(function(){
         var last = $('.rate-stars .star:last').index();
@@ -32,6 +31,12 @@ $(document).ready(function () {
             });
         }
         return false;
+    });
+
+    $('.user_menu').mouseenter(function(){
+        $(this).children('ul').show();
+    }).mouseleave(function(){
+        $(this).children('ul').hide();
     });
 
     //Grafiskie redaktori

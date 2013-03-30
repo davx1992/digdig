@@ -80,7 +80,7 @@
             <span><?php echo $object['title']?></span>
             <div class="rate-stars">
                 <?php for ($i = 0; $i < 5; $i++): ?>
-                    <a class="star" href="#" />
+                    <a class="star" href="#"></a>
                 <?php endfor ?>
                 <?php if ($rate != 0 && $rated): ?>
                     <script type="text/javascript">
