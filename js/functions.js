@@ -39,6 +39,23 @@ $(document).ready(function () {
         $(this).children('ul').hide();
     });
 
+    $('.user-information').click(function() {
+        $('.user-menu-list li').removeClass('active');
+        $(this).addClass('active');
+        $.get(base + 'ajax_userform.php', function(data) {
+            $('#user_map_canvas').hide();
+            $('.maincol').append(data);
+        });
+
+    $('.your-objects').click(function(){
+        $('.user-menu-list li').removeClass('active');
+        $('#user-info-form').remove();
+        $('#user_map_canvas').show();
+        $(this).addClass('active');
+
+    });
+});
+
     //Grafiskie redaktori
     tinyMCE.init({
         mode:'textareas',

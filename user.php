@@ -1,14 +1,6 @@
 <?php include("includes/db.php");?>
 <?php include("includes/authcheck.php"); ?>
-<?php
-//    /* Dabūnu koordinātes */
-//    $result = mysql_query("SELECT * FROM coordinates WHERE coordinates.object_id = '".$data['get']['id']."'",$db);
-//    $coord = mysql_fetch_array($result, MYSQL_ASSOC);
-//    $title = array("title"=>$object['title']);
-//    $coord = array_merge($coord, $title);
-//
-//    $coord = json_encode($coord);
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,9 +27,27 @@
         <div class="leftcol">
             <ul class="user-menu-list">
                 <li class="your-objects active">Your objects</li>
-                <li class="">User information</li>
+                <li class="user-information">User information</li>
             </ul>
         </div>
+
+        <script type="text/javascript">
+            <!-- Ajax userform actions -->
+            function sendAjaxUserData() {
+                $.post('<?php echo $baseUrl ?>ajax_userform.php', $('#user-form-data').serialize(), function(data){
+                    $('#user-info-form').remove();
+                    $('.maincol').append(data);
+                });
+            }
+
+            function sendAjaxUserPassword() {
+                $.post('<?php echo $baseUrl ?>ajax_userform.php', $('#user-password').serialize(), function(data){
+                    $('#user-info-form').remove();
+                    $('.maincol').append(data);
+                });
+            }
+        </script>
+
         <div class="maincol">
             <div id="user_map_canvas"></div>
         </div>
