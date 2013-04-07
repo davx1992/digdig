@@ -107,6 +107,12 @@ a {
     left: 305px;
 }
 
+.editobject .add_button.addObj {
+    position: absolute;
+    top: 77px;
+    left: 680px;
+}
+
 .submitBtn {
     color: #1C1D1D;
     font-size: 28px;
@@ -264,6 +270,18 @@ a {
     margin-left: 20px;
 }
 
+#addObject .input label {
+    top: 0;
+}
+
+#addObject .fieldset {
+    padding-bottom: 15px;
+}
+
+#addObject .fieldset input {
+    margin-bottom: 10px;
+}
+
 #addObject {
     padding-bottom:20px;
     padding-top: 20px;
@@ -315,6 +333,12 @@ a {
 .addPhotosLink:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.editobject .addPhotosLink {
+    top: 155px;
+    position: absolute;
+    left: 730px;
 }
 
 /*  ADD PHOTOS     */
@@ -860,11 +884,113 @@ form .submitter {
     margin-top: 15px;
 }
 
+/* Comments block */
 
+.comments-block {
+    margin-top: 45px;
+    border-top: 1px solid #A3A6A3;
+}
 
+.comments-block .add-block {
+    background: #E6E5E1;
+}
 
+.comments-block .add-block form {
+    width: 100%;
+}
 
+.comments-block h3,h2,h1 {
+    background: #E6E5E1;
+    padding-left: 20px;
+    padding-top: 3px;
+}
 
+.comments-block .add-block form textarea.commenttext {
+    margin-top: 5px;
+    margin-left: -5px;
+    padding-right: 0px;
+    width: 660px;
+    height: 100px;
+    resize: none;
+}
+
+.comments-count {
+    margin-right: 5px;
+    float: right;
+    margin-top: -22px;
+}
+
+.comments-block .add-block form .submitter {
+    padding: 0 0 10px 0;
+}
+
+.comments-block .add-block form .submitter input#submit {
+    margin-right: 42px;
+    float: right;
+    padding: 4px 12px;
+}
+
+.comment .info {
+    font-size: 11px;
+}
+
+.comment .info .username {
+    color: #238a43;
+}
+
+.comment .info .datetime {
+    color: #b3b3b3;
+    padding-left: 15px;
+}
+
+.comment {
+    margin-left: 15px;
+    padding-bottom: 10px;
+    margin-top: 15px;
+    border-bottom: 1px solid #A3A6A3;
+}
+
+.no-comment {
+    text-align: center;
+}
+
+.no-comment a {
+    color: #238a43;
+}
+
+.no-comment a:hover {
+    text-decoration: underline;
+}
+
+.no-comment h3 {
+    padding: 10px;
+}
+
+.editlink {
+    top: 251px;
+    width: 45px;
+    height: 100px;
+    position: absolute;
+    background: url('../img/editlabel.png') no-repeat center top;
+    left: -45px;
+}
+
+.editlink p {
+    margin-top: 37px;
+    margin-left: 10px;
+    color: #fff;
+    font-weight: bold;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    text-transform: uppercase;
+}
+
+.rotate {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
 
 
 

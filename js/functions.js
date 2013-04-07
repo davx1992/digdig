@@ -67,6 +67,13 @@ $(document).ready(function () {
     tinyMCE.init({
         mode:'textareas',
         width:'900',
+        editor_selector:"mceEditorSimpleEdit",
+        theme:'simple'
+    });
+
+    tinyMCE.init({
+        mode:'textareas',
+        width:'900',
         height:'400',
         editor_selector:"mceEditor",
         theme:'advanced'
@@ -75,7 +82,7 @@ $(document).ready(function () {
     $('.addPhotosLink').click(function () {
         var dummie = $(this);
         $.post("objectsaver.php", $('#addObjectForm').serialize(), function (data) {
-            console.log(data);
+
         });
         $.fancybox.open({
             href:'addphotos.php',
@@ -90,7 +97,30 @@ $(document).ready(function () {
             afterClose:function () {
                 $('.addObj').attr('onclick', '');
                 dummie.remove();
-                //    $.post("cleaner.php?deletesession=gallery_id");
+                $.post("cleaner.php?deletesession=gallery_id");
+                $.post("cleaner.php?deletesession=object_id");
+            }
+        });
+        return false;
+    });
+
+    $('.addPhotosLink.edit').click(function () {
+        $.post("objectsaver.php?edit=true", $('#addObjectForm').serialize(), function (data) {
+
+        });
+        $.fancybox.open({
+            href:'addphotos.php',
+            type:'iframe',
+            padding:5,
+            width:960,
+            height:550,
+            padding:0,
+            margin:50,
+            scrolling:'no',
+            autoSize:false,
+            afterClose:function () {
+                $('.editobject .addObj.first').removeClass('first');
+                $.post("cleaner.php?deletesession=gallery_id");
             }
         });
         return false;
@@ -119,6 +149,17 @@ $(document).ready(function () {
     //END
 
 });
+
+    function sendComment(){
+        if($('textarea.comment').val() != '') {
+            $.post(base + 'ajax_comments.php', $('#add_comment').serialize(), function(data){
+                $('.comments-list').append(data);
+                $('textarea.comment').val('');
+                $('.comments-list .comment:last').fadeIn();
+                $('.comments-count span').html(Number($('.comments-count span').text())+1);
+            });
+        }
+    }
 
     function sendAjax() {
         $.post('ajax_return.php', { name:'true' }, function (data) {

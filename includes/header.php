@@ -1,5 +1,5 @@
       <div id="header">
-        <a href="/"id="logo"></a>
+        <a href="<?php echo $baseUrl ?>"id="logo"></a>
         <?php include("includes/menu.php"); ?>
         <a href="addobject.php"id="add" title="Add object"></a>
         <div id="sociale">
