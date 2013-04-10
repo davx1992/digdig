@@ -145,13 +145,10 @@
         /* End */
         google.maps.event.addListener(map, 'click', function (e) {
             var image = '/digdig/img/pointer.png';
-            var title = e.latLng.lng().toFixed(3) + '|' + e.latLng.lng().toFixed(3);
-            console.log(markersArray);
             clearOverlays();
             var marker = new google.maps.Marker({
                 position:new google.maps.LatLng(e.latLng.lat().toFixed(3), e.latLng.lng().toFixed(3)),
                 map:map,
-                title:title,
                 icon:image
             });
             $('#coordx').val(e.latLng.lat().toFixed(3));

@@ -44,7 +44,7 @@ include("includes/authcheck.php");
 
                     <br style="clear:both;"/>
                     <input type="submit" class="add_button addObj" onclick="this.disabled=true;" value="Next">
-                    <a class="addPhotosLink">Add photos</a>
+                    <a class="addPhotosLink" id="addPhotoLink" >Add photos</a>
 
                     <div class="input text">
                         <label>Description</label>

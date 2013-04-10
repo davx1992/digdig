@@ -23,9 +23,17 @@ if (isset($_FILES) && !empty($_FILES)) {
         }
         /* Izveidojam galeriju */
         $oid = $_SESSION['object_id'];
+
         if (!isset($_SESSION['gallery_id'])) {
             $result = mysql_query("INSERT INTO gallery(`object_id`,`date`) VALUES ('" . $oid . "','" . date("Y-m-d H:i:s") . "')");
             $_SESSION['gallery_id'] = mysql_insert_id();
+        } elseif($_SESSION['edit']) {
+            $gallery = mysql_query("
+                SELECT gallery.*
+                FROM gallery
+                WHERE gallery.object_id = '" . $_SESSION['object_id'] . "'");
+            $gallery = mysql_fetch_array($gallery, MYSQL_ASSOC);
+            $_SESSION['gallery_id'] = $gallery['id'];
         }
         $gallery_id = $_SESSION['gallery_id'];
         $uploads_dir = '/uploads/objects/' . $oid . '/';
@@ -49,7 +57,13 @@ if (isset($_FILES) && !empty($_FILES)) {
             /* Pievienojam datubaze attelus */
             $result = mysql_query("INSERT INTO pictures(`gallery_id`,`name`,`date`) VALUES ('" . $gallery_id . "','" . $name . "','" . date("Y-m-d H:i:s") . "') ");
             /* Izvadu celju uz atteliem */
-            echo 'uploads/objects/' . $oid . '/' . $gallery_id . '/thumbnail/' . $name;
+            $object = array(
+                'path' => 'uploads/objects/' . $oid . '/' . $gallery_id . '/thumbnail/' . $name,
+                'gallery_id' => $gallery_id,
+                'object_id' => $oid,
+                'name' => $name
+            );
+            echo json_encode($object);
             $pic->resize(200, 200)->save('uploads/objects/' . $oid . '/' . $gallery_id . '/thumbnail/' . $name);
         }
     }

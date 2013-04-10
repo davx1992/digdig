@@ -377,6 +377,15 @@ a {
     margin-bottom: 40px;
 }
 
+.removeLink {
+    background: url('../img/delete.png') no-repeat center center;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -14px;
+    right: -14px;
+}
+
 .addedPhoto img {
     vertical-align: middle;
 }

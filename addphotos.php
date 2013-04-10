@@ -1,5 +1,22 @@
 <?php
+include("includes/db.php");
+include("includes/authcheck.php");
 
+    if (isset($_SESSION['edit'])) {
+        $gallery = mysql_query("
+            SELECT gallery.*
+            FROM gallery
+            WHERE gallery.object_id = '" . $_SESSION['object_id'] . "'");
+        $gallery = mysql_fetch_array($gallery, MYSQL_ASSOC);
+        $pictures = mysql_query("
+            SELECT pictures.*
+            FROM pictures
+            WHERE pictures.gallery_id = '" . $gallery['id'] . "'");
+
+        while ($picture = mysql_fetch_array($pictures, MYSQL_ASSOC)) {
+            $images[] = $picture;
+        }
+    }
 ?>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" media="all"/>
@@ -16,6 +33,25 @@
       rel='stylesheet' type='text/css'>
 <!-- END -->
 <script type="text/javascript">
+    //Bilzu dzeshanas skripts
+    function deleteImg(object_id, gallery_id, name, element) {
+        name = name + '.jpg';
+        $.post("deleter.php", { object_id: object_id, gallery_id: gallery_id, name: name }, function (data) {
+            var response = JSON.parse(data);
+            if (response.response == true) {
+                if (typeof element == 'object') {
+                    if ($(element).attr('class') == 'addedPhoto') {
+                        $(element).remove();
+                    } else {
+                        $(element).parent('.addedPhoto').remove();
+                    }
+                } else {
+                    $('#' + element).remove();
+                    console.log($('#' + element));
+                }
+            }
+        });
+    }
     //Inicializeeju plupload
     $(function () {
         var uploader = new plupload.Uploader({
@@ -27,7 +63,7 @@
             flash_swf_url:'js/plupload/plupload.flash.swf',
             silverlight_xap_url:'js/plupload/plupload.silverlight.xap',
             filters:[
-                {title:"Image files", extensions:"jpg,gif,png"},
+                {title:"Image files", extensions:"jpg,gif,png"}
             ]
         });
 
@@ -69,8 +105,10 @@
         });
 
         uploader.bind('FileUploaded', function (up, file, response) {
-            //$('#' + file.id + " b").html("100%");
-            $('#photoHolder').children('#' + file.id).append('<img  src="' + response.response + '" />');
+            var obj = JSON.parse(response.response);
+            var name = obj.name;
+            $('#photoHolder').children('#' + file.id).append('<a class="removeLink" onclick="deleteImg(' + obj.object_id + ',' + obj.gallery_id + ',' + name.replace('.jpg', '') + ',' + file.id + '); return false;" href="#"><a/>');
+            $('#photoHolder').children('#' + file.id).append('<img  src="' + obj.path + '" />');
         });
     });
 
@@ -100,6 +138,14 @@
     </div>
     <div id="photoHolderWrap" class="scroll-pane" style="width:960px;">
         <div id="photoHolder">
+            <?php if (isset($images)): ?>
+                <?php foreach ($images as $k=>$img): ?>
+                    <div class="addedPhoto">
+                        <a class="removeLink" onclick="deleteImg(<?php echo $_SESSION['object_id'] ?>, <?php echo $gallery['id'] ?>, '<?php echo strstr($img['name'], '.', true) ?>', this); return false;" href="#"><a/>
+                        <img src="./uploads/objects/<?php echo $_SESSION['object_id'] ?>/<?php echo $gallery['id'] ?>/thumbnail/<?php echo $img['name'] ?>"/>
+                    </div>
+                <?php endforeach ?>
+            <?php endif ?>
         </div>
     </div>
     <div class="fancyFooter">

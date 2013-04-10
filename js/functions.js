@@ -79,7 +79,7 @@ $(document).ready(function () {
         theme:'advanced'
     });
     //end
-    $('.addPhotosLink').click(function () {
+    $('#addPhotoLink').click(function () {
         var dummie = $(this);
         $.post("objectsaver.php", $('#addObjectForm').serialize(), function (data) {
 
@@ -97,14 +97,12 @@ $(document).ready(function () {
             afterClose:function () {
                 $('.addObj').attr('onclick', '');
                 dummie.remove();
-                $.post("cleaner.php?deletesession=gallery_id");
-                $.post("cleaner.php?deletesession=object_id");
             }
         });
         return false;
     });
 
-    $('.addPhotosLink.edit').click(function () {
+    $('#editPhotoLink').click(function () {
         $.post("objectsaver.php?edit=true", $('#addObjectForm').serialize(), function (data) {
 
         });
@@ -120,7 +118,6 @@ $(document).ready(function () {
             autoSize:false,
             afterClose:function () {
                 $('.editobject .addObj.first').removeClass('first');
-                $.post("cleaner.php?deletesession=gallery_id");
             }
         });
         return false;
