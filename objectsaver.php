@@ -1,7 +1,7 @@
 <?php
 include("includes/db.php");
 include("includes/authcheck.php");
-
+//var_dump($_SESSION); var_dump($_POST);
     if (isset($_POST) && isset($_GET['edit'])) {
         $data = $_POST;
         //Inserting in main info
@@ -35,6 +35,7 @@ include("includes/authcheck.php");
         }
         $_SESSION['saved'] = true;
         $_SESSION['object_id'] = $object_id;
+        //var_dump($_SESSION); die;
     } else {
         $data = $_POST;
         //Inserting in main info

@@ -67,9 +67,7 @@ include("includes/authcheck.php");
     </div>
 </div>
 <div id="footer-wrap">
-    <div id="footer">
-
-    </div>
+    <?php include('includes/footer.php'); ?>
 </div>
 </body>
 </html>

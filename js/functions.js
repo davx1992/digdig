@@ -2,12 +2,7 @@
 var base = 'http://localhost/digdig/';
 <!-- End -->
 $(document).ready(function () {
-    $('#featured-objects .object-small p').text(function(index, text) {
-        return text.substr(0, 200);
-    });
-
     $('#featured-objects .object-small p:empty' ).remove();
-    $('#featured-objects .object-small p').append('...');
 
     $('.rate-stars .star').mouseover(function(){
         var last = $('.rate-stars .star:last').index();

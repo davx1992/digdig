@@ -27,7 +27,7 @@ if (isset($_FILES) && !empty($_FILES)) {
         if (!isset($_SESSION['gallery_id'])) {
             $result = mysql_query("INSERT INTO gallery(`object_id`,`date`) VALUES ('" . $oid . "','" . date("Y-m-d H:i:s") . "')");
             $_SESSION['gallery_id'] = mysql_insert_id();
-        } elseif($_SESSION['edit']) {
+        } elseif(isset($_SESSION['edit'])) {
             $gallery = mysql_query("
                 SELECT gallery.*
                 FROM gallery

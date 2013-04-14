@@ -47,7 +47,6 @@ include("includes/authcheck.php");
                     }
                 } else {
                     $('#' + element).remove();
-                    console.log($('#' + element));
                 }
             }
         });
@@ -90,7 +89,6 @@ include("includes/authcheck.php");
         });
 
         uploader.bind('UploadProgress', function (up, file) {
-            //$('#' + file.id + " b").html(file.percent + "%");
             $('#' + file.id).children('.progressBar').children('.bar').css('width', file.percent + '%');
         });
 

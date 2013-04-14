@@ -201,7 +201,7 @@ a {
 
 #footer-wrap {
     background: url("../img/footer-line.png") repeat-x top left #E6E5E1;
-    height: 300px;
+    height: 220px;
     text-shadow: 0 1px #fff;
 }
 
@@ -210,6 +210,37 @@ a {
     margin-left: auto;
     margin-right: auto;
     height: 100%;
+}
+
+#footer > ul {
+    padding-top: 15px;
+    list-style: none;
+}
+
+#footer > ul li {
+    padding-left: 20px;
+    width: 300px;
+    float: left;
+}
+
+#footer > ul li p {
+    font-size: 13px;
+}
+
+#footer > ul li ul {
+    list-style: none;
+}
+
+#footer > ul li h3 {
+    padding-left: 15px;
+}
+
+#footer > ul li ul.externallinks a {
+    color: #888;
+}
+
+#footer > ul li ul li {
+    padding-top: 10px;
 }
 
 /*    FORM ELEMENTS  */
@@ -715,7 +746,7 @@ ul#menu li.active a {
     width: 250px;
 }
 
-#left-col:first-letter {
+.main-text-holder:first-letter {
     font-size: 24px;
     color: #FE8300;
 }
@@ -752,6 +783,19 @@ ul#menu li.active a {
 }
 
 .rate-stars .star.rate {
+    background: url('../img/star.png') no-repeat center center;
+}
+
+.rate-stars .stare {
+    background: url('../img/star_off.png') no-repeat center center;
+    width: 32px;
+    height: 32px;
+    margin-left: 5px;
+    cursor: pointer;
+    float: left;
+}
+
+.rate-stars .stare.rate {
     background: url('../img/star.png') no-repeat center center;
 }
 
@@ -1001,9 +1045,36 @@ form .submitter {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
+/* Object list view page */
+.object.listview {
+    padding: 20px;
+    margin-bottom: 15px;
+    font-size: 12px;
+    position: relative;
+}
 
+.object.listview .text {
+    padding-top: 15px;
+    float: left;
+    width: 600px;
+}
 
+.object.listview .photo {
+    margin-top: -26px;
+    margin-left: 60px;
+    float: left;
+    width: 200px;
+}
 
+.object.listview h3 {
+    font-size: 22px;
+}
+
+.object.listview .rate-stars {
+    top: 10px;
+    position: absolute;
+    left: 415px;
+}
 
 
 

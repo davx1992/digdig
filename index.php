@@ -1,22 +1,47 @@
 <?php include("includes/db.php"); ?>
 <?php
-    $result = mysql_query('
+$result = mysql_query('
             SELECT gallery.*, objects.description
             FROM gallery, objects
-            WHERE gallery.object_id = objects.id
+            WHERE gallery.object_id = objects.id AND objects.description != ""
             ORDER BY date DESC
             LIMIT 6');
-    while ($object = mysql_fetch_array($result, MYSQL_ASSOC)) {
-        $picres = mysql_query('
+while ($object = mysql_fetch_array($result, MYSQL_ASSOC)) {
+    $picres = mysql_query('
             SELECT pictures.*
             FROM pictures
-            WHERE pictures.gallery_id = '.$object['id']);
-        while ($picture = mysql_fetch_array($picres, MYSQL_ASSOC)) {
-             $pics['pictures'][] = $picture;
-        }
-        $gallery[] = array_merge($object, $pics);
-        unset($pics);
+            WHERE pictures.gallery_id = ' . $object['id']);
+    while ($picture = mysql_fetch_array($picres, MYSQL_ASSOC)) {
+        $pics['pictures'][] = $picture;
     }
+    $gallery[] = array_merge($object, $pics);
+    unset($pics);
+}
+
+/* Iznemu objekta reitingus, lai iznemtu labakos objektus */
+$reitings = mysql_query('
+            SELECT object_id, SUM(rate) / (SELECT COUNT(id) FROM ratings as ratingtb WHERE ratings.object_id = ratingtb.object_id) AS rate
+            FROM ratings
+            WHERE rate<=5
+            GROUP BY object_id
+            ORDER BY rate DESC LIMIT 4');
+
+while ($reiting = mysql_fetch_array($reitings, MYSQL_ASSOC)) {
+    $result = mysql_query('
+                SELECT gallery.*, objects.description
+                FROM gallery, objects
+                WHERE gallery.object_id = "' . $reiting['object_id'] . '" AND objects.description != ""');
+    $object = mysql_fetch_array($result, MYSQL_ASSOC);
+    $picres = mysql_query('
+                    SELECT pictures.*
+                    FROM pictures
+                    WHERE pictures.gallery_id = ' . $object['id'] . ' LIMIT 1');
+    while ($picture = mysql_fetch_array($picres, MYSQL_ASSOC)) {
+        $pics['pictures'][] = $picture;
+    }
+    $bestObjects[] = array_merge($object, $pics);
+    unset($pics);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,21 +60,21 @@
 <body onload="initialize();">
 
 <!-- Overlay -->
-    <?php if(isset($_SESSION['message'])): ?>
-        <div class="overlay" id="mies1">
-            <p><span> <?php echo $_SESSION['message'] ?></span></p>
-        </div>
-        <script type="text/javascript">
-            jQuery('#mies1').overlay({
-                top: 150,
-                mask: {
-                    loadSpeed: 200,
-                    opacity: 0.5
-                },
-                closeOnClick: true,
-                load: true
-            });
-        </script>
+<?php if (isset($_SESSION['message'])): ?>
+<div class="overlay" id="mies1">
+    <p><span> <?php echo $_SESSION['message'] ?></span></p>
+</div>
+<script type="text/javascript">
+    jQuery('#mies1').overlay({
+        top:150,
+        mask:{
+            loadSpeed:200,
+            opacity:0.5
+        },
+        closeOnClick:true,
+        load:true
+    });
+</script>
     <?php unset($_SESSION['message']); ?>
     <?php endif ?>
 <!-- Overlay end -->
@@ -66,14 +91,16 @@
             <h2 class="home-heading">
                 <span>Latest objects</span>
             </h2>
+
             <div id="featured-objects">
                 <?php foreach ($gallery as $k => $gal): ?>
-                    <div class="object-small">
-                        <img src="uploads/objects/<?php echo $gal['object_id'] ?>/<?php echo $gal['id'] ?>/<?php echo $gal['pictures'][0]['name'] ?>"/>
-                        <a href="<?php echo $baseUrl.'view.php?id='.$gal['object_id'] ?>">
-                            <p><?php echo $gal['description']?></p>
-                        </a>
-                    </div>
+                <?php $text = (strlen($gal['description']) > 140) ? substr($gal['description'], 0, 140) . '...' : $gal['description']; ?>
+                <div class="object-small">
+                    <img src="uploads/objects/<?php echo $gal['object_id'] ?>/<?php echo $gal['id'] ?>/thumbnail/<?php echo $gal['pictures'][0]['name'] ?>"/>
+                    <a href="<?php echo $baseUrl . 'view.php?id=' . $gal['object_id'] ?>">
+                        <p><?php echo $text ?></p>
+                    </a>
+                </div>
                 <?php endforeach ?>
             </div>
         </div>
@@ -83,51 +110,23 @@
             </h2>
 
             <div id="latest-objects">
-                <div class="news-object object-small">
-                    <img src="img/dummies/featured-1.jpg"/>
-                    <a href="/">
-                        <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
-                            One morning, when Gregor Samsa woke from troubled dreams,
-                            His many legs, pitifully thin compared with the size of
-                            the rest of him, waved about</p>
-                    </a>
-                </div>
-                <div class="news-object object-small">
-                    <img src="img/dummies/featured-1.jpg"/>
-                    <a href="/">
-                        <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
-                            One morning, when Gregor Samsa woke from troubled dreams,
-                            His many legs, pitifully thin compared with the size of
-                            the rest of him, waved about</p>
-                    </a>
-                </div>
-                <div class="news-object object-small">
-                    <img src="img/dummies/featured-1.jpg"/>
-                    <a href="/">
-                        <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
-                            One morning, when Gregor Samsa woke from troubled dreams,
-                            His many legs, pitifully thin compared with the size of
-                            the rest of him, waved about</p>
-                    </a>
-                </div>
-                <div class="news-object object-small">
-                    <img src="img/dummies/featured-1.jpg"/>
-                    <a href="/">
-                        <p>Grumpy wizards make toxic brew for the evil Queen and Jack.
-                            One morning, when Gregor Samsa woke from troubled dreams,
-                            His many legs, pitifully thin compared with the size of
-                            the rest of him, waved about</p>
-                    </a>
-                </div>
+                <?php if (isset($bestObjects) && !empty($bestObjects)): ?>
+                <?php foreach ($bestObjects as $k => $best): ?>
+                    <?php $text = (strlen($best['description']) > 140) ? substr($best['description'], 0, 140) . '...' : $best['description']; ?>
+                    <div class="news-object object-small">
+                        <img src="uploads/objects/<?php echo $best['object_id'] ?>/<?php echo $best['id'] ?>/thumbnail/<?php echo $best['pictures'][0]['name'] ?>"/>
+                        <a href="<?php echo $baseUrl . 'view.php?id=' . $best['object_id'] ?>">
+                            <p><?php echo $text ?></p>
+                        </a>
+                    </div>
+                    <?php endforeach ?>
+                <?php endif ?>
             </div>
         </div>
-        <?php //include("includes/rightside.php"); ?>
     </div>
 </div>
 <div id="footer-wrap">
-    <div id="footer">
-
-    </div>
+    <?php include('includes/footer.php'); ?>
 </div>
 </body>
 </html>

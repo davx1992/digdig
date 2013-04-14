@@ -11,7 +11,7 @@ include("includes/authcheck.php");
         FROM objects, object_options
         WHERE '" . $data['get']['id'] . "' = objects.id AND '" . $data['get']['id'] . "' = object_options.object_id");
     $object = mysql_fetch_array($result, MYSQL_ASSOC);
-    $_SESSION['object_id'] = $data['get']['id'];
+    $_SESSION['object_id'] = $data['get']['id']; var_dump($object);
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,9 +68,7 @@ include("includes/authcheck.php");
     </div>
 </div>
 <div id="footer-wrap">
-    <div id="footer">
-
-    </div>
+    <?php include('includes/footer.php'); ?>
 </div>
 </body>
 </html>
