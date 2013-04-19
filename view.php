@@ -83,7 +83,7 @@
         var object_id = <?php echo $data['get']['id'] ?>;
     </script>
 </head>
-<body onload="initObjectView(coords);">
+<body onload="initObjectView(coords);" class="view">
 <div id="header-wrap">
     <?php include("includes/header.php"); ?>
 </div>

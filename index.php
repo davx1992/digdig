@@ -1,47 +1,47 @@
 <?php include("includes/db.php"); ?>
 <?php
-$result = mysql_query('
-            SELECT gallery.*, objects.description
-            FROM gallery, objects
-            WHERE gallery.object_id = objects.id AND objects.description != ""
-            ORDER BY date DESC
-            LIMIT 6');
-while ($object = mysql_fetch_array($result, MYSQL_ASSOC)) {
-    $picres = mysql_query('
-            SELECT pictures.*
-            FROM pictures
-            WHERE pictures.gallery_id = ' . $object['id']);
-    while ($picture = mysql_fetch_array($picres, MYSQL_ASSOC)) {
-        $pics['pictures'][] = $picture;
+    $result = mysql_query('
+        SELECT gallery.*, objects.description
+        FROM gallery, objects
+        WHERE gallery.object_id = objects.id AND objects.description != ""
+        ORDER BY date DESC
+        LIMIT 6');
+    while ($object = mysql_fetch_array($result, MYSQL_ASSOC)) {
+        $picres = mysql_query('
+                SELECT pictures.*
+                FROM pictures
+                WHERE pictures.gallery_id = ' . $object['id']);
+        while ($picture = mysql_fetch_array($picres, MYSQL_ASSOC)) {
+            $pics['pictures'][] = $picture;
+        }
+        $gallery[] = array_merge($object, $pics);
+        unset($pics);
     }
-    $gallery[] = array_merge($object, $pics);
-    unset($pics);
-}
 
 /* Iznemu objekta reitingus, lai iznemtu labakos objektus */
-$reitings = mysql_query('
-            SELECT object_id, SUM(rate) / (SELECT COUNT(id) FROM ratings as ratingtb WHERE ratings.object_id = ratingtb.object_id) AS rate
-            FROM ratings
-            WHERE rate<=5
-            GROUP BY object_id
-            ORDER BY rate DESC LIMIT 4');
+    $reitings = mysql_query('
+        SELECT object_id, SUM(rate) / (SELECT COUNT(id) FROM ratings as ratingtb WHERE ratings.object_id = ratingtb.object_id) AS rate
+        FROM ratings
+        WHERE rate<=5
+        GROUP BY object_id
+        ORDER BY rate DESC LIMIT 4');
 
-while ($reiting = mysql_fetch_array($reitings, MYSQL_ASSOC)) {
-    $result = mysql_query('
-                SELECT gallery.*, objects.description
-                FROM gallery, objects
-                WHERE gallery.object_id = "' . $reiting['object_id'] . '" AND objects.description != ""');
-    $object = mysql_fetch_array($result, MYSQL_ASSOC);
-    $picres = mysql_query('
-                    SELECT pictures.*
-                    FROM pictures
-                    WHERE pictures.gallery_id = ' . $object['id'] . ' LIMIT 1');
-    while ($picture = mysql_fetch_array($picres, MYSQL_ASSOC)) {
-        $pics['pictures'][] = $picture;
+    while ($reiting = mysql_fetch_array($reitings, MYSQL_ASSOC)) {
+        $result = mysql_query('
+                    SELECT gallery.*, objects.description
+                    FROM gallery, objects
+                    WHERE gallery.object_id = "' . $reiting['object_id'] . '" AND objects.description != ""');
+        $object = mysql_fetch_array($result, MYSQL_ASSOC);
+        $picres = mysql_query('
+                        SELECT pictures.*
+                        FROM pictures
+                        WHERE pictures.gallery_id = ' . $object['id'] . ' LIMIT 1');
+        while ($picture = mysql_fetch_array($picres, MYSQL_ASSOC)) {
+            $pics['pictures'][] = $picture;
+        }
+        $bestObjects[] = array_merge($object, $pics);
+        unset($pics);
     }
-    $bestObjects[] = array_merge($object, $pics);
-    unset($pics);
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -94,35 +94,49 @@ while ($reiting = mysql_fetch_array($reitings, MYSQL_ASSOC)) {
 
             <div id="featured-objects">
                 <?php foreach ($gallery as $k => $gal): ?>
-                <?php $text = (strlen($gal['description']) > 140) ? substr($gal['description'], 0, 140) . '...' : $gal['description']; ?>
+                <?php $gal['description'] = strip_tags($gal['description']) ?>
+                <?php $text = (strlen($gal['description']) > 220) ? substr($gal['description'], 0, 220) . '...' : $gal['description']; ?>
                 <div class="object-small">
                     <img src="uploads/objects/<?php echo $gal['object_id'] ?>/<?php echo $gal['id'] ?>/thumbnail/<?php echo $gal['pictures'][0]['name'] ?>"/>
                     <a href="<?php echo $baseUrl . 'view.php?id=' . $gal['object_id'] ?>">
-                        <p><?php echo $text ?></p>
+                        <p><?php echo $text; ?></p>
                     </a>
                 </div>
                 <?php endforeach ?>
+                <script type="text/javascript">
+                    $('#featured-objects .object-small a > p').each(function(){
+                        $(this).css('padding-top', ($('#featured-objects .object-small a').height() - $(this).height()) / 2);
+                        $(this).parent('a').css('display', 'none');
+                    });
+                </script>
             </div>
         </div>
-        <div id="latest-wrapper">
-            <h2 class="home-heading">
-                <span>Best objects</span>
-            </h2>
+        <?php if (isset($bestObjects) && !empty($bestObjects)): ?>
+            <div id="latest-wrapper">
+                <h2 class="home-heading">
+                    <span>Best objects</span>
+                </h2>
 
-            <div id="latest-objects">
-                <?php if (isset($bestObjects) && !empty($bestObjects)): ?>
-                <?php foreach ($bestObjects as $k => $best): ?>
-                    <?php $text = (strlen($best['description']) > 140) ? substr($best['description'], 0, 140) . '...' : $best['description']; ?>
-                    <div class="news-object object-small">
-                        <img src="uploads/objects/<?php echo $best['object_id'] ?>/<?php echo $best['id'] ?>/thumbnail/<?php echo $best['pictures'][0]['name'] ?>"/>
-                        <a href="<?php echo $baseUrl . 'view.php?id=' . $best['object_id'] ?>">
-                            <p><?php echo $text ?></p>
-                        </a>
-                    </div>
+                <div id="latest-objects">
+                    <?php foreach ($bestObjects as $k => $best): ?>
+                        <?php $best['description'] = strip_tags($best['description']) ?>
+                        <?php $text = (strlen($best['description']) > 140) ? substr($best['description'], 0, 140) . '...' : $best['description']; ?>
+                        <div class="news-object object-small">
+                            <img src="uploads/objects/<?php echo $best['object_id'] ?>/<?php echo $best['id'] ?>/thumbnail/<?php echo $best['pictures'][0]['name'] ?>"/>
+                            <a href="<?php echo $baseUrl . 'view.php?id=' . $best['object_id'] ?>">
+                                <p><?php echo $text ?></p>
+                            </a>
+                        </div>
                     <?php endforeach ?>
-                <?php endif ?>
+                    <script type="text/javascript">
+                        $('#latest-objects .object-small a > p').each(function(){
+                            $(this).css('padding-top', ($('#latest-objects .object-small a').height() - $(this).height()) / 2);
+                            $(this).parent('a').css('display', 'none');
+                        });
+                    </script>
+                </div>
             </div>
-        </div>
+        <?php endif ?>
     </div>
 </div>
 <div id="footer-wrap">

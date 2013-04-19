@@ -2,8 +2,22 @@
 include("includes/db.php");
 include("includes/authcheck.php");
 
-    //Ieraksu sesija ka laboju objektu
-    $_SESSION['edit'] = true;
+    /* Dzeesham aara objektu */
+    if (isset($_GET['delete'])) {
+        $query = mysql_query("DELETE objects.*, object_options.*, coordinates.*
+            FROM objects
+            LEFT JOIN object_options ON object_options.object_id = objects.id
+            LEFT JOIN coordinates ON coordinates.object_id = objects.id
+            WHERE objects.id = " . $_GET['delete']);
+
+        $query = mysql_query("DELETE gallery.*, pictures.*
+            FROM gallery
+            LEFT JOIN pictures ON pictures.gallery_id = gallery.id
+            WHERE gallery.object_id = " . $_GET['delete']);
+
+        header('Location: ' . $baseUrl . 'user.php');
+    }
+
     // Iznemu objektu no datubazes
     $data = getData();
     $result = mysql_query("
@@ -11,7 +25,16 @@ include("includes/authcheck.php");
         FROM objects, object_options
         WHERE '" . $data['get']['id'] . "' = objects.id AND '" . $data['get']['id'] . "' = object_options.object_id");
     $object = mysql_fetch_array($result, MYSQL_ASSOC);
-    $_SESSION['object_id'] = $data['get']['id']; var_dump($object);
+
+    //Ieraksu sesija ka laboju objektu
+    if (isset($_SESSION['User'])){
+        if ($_SESSION['User']['id'] == $object['user_id'] || $_SESSION['User']['role'] == 2) {
+            $editable = true;
+        } else {
+            header('Location: ' . $baseUrl . 'user.php');
+        }
+    }
+    $_SESSION['object_id'] = $data['get']['id'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,15 +75,16 @@ include("includes/authcheck.php");
                     <br style="clear:both;"/>
                     <input type="submit" class="add_button addObj" value="Next">
                     <a class="addPhotosLink edit" id="editPhotoLink">Add photos</a>
+                    <a class="admin-delete" onclick="if(!confirm('Are you sure, about deletion?')) return false;" href="<?php echo $baseUrl ?>editobject.php?delete=<?php echo $object['id'] ?>">[delete]</a>
 
                     <div class="input text">
                         <label>Description</label>
-                        <textarea class="mceEditorSimpleEdit" name="description" value="<?php echo $object['description'] ?>"></textarea>
+                        <textarea class="mceEditorSimpleEdit" id="description" name="description"><?php echo $object['description'] ?></textarea>
                     </div>
 
                     <div class="input text">
                         <label>Main text</label>
-                        <textarea class="mceEditor" name="main_text" value="<?php echo $object['main_text'] ?>" ></textarea>
+                        <textarea class="mceEditor" id="main_text" name="main_text"><?php echo $object['main_text'] ?></textarea>
                     </div>
                 </form>
             </div>

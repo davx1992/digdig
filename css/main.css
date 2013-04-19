@@ -113,6 +113,16 @@ a {
     left: 680px;
 }
 
+.editobject a.admin-delete {
+    position: relative;
+    left: 725px;
+    color: #FE2E2E;
+}
+
+.editobject a.admin-delete:hover {
+    text-decoration: underline;
+}
+
 .submitBtn {
     color: #1C1D1D;
     font-size: 28px;
@@ -162,8 +172,9 @@ a {
     top: 0;
     height: 190px;
     color:#fff;
-    background: grey;
-    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    background: url('../img/hover_bg.png');
     text-decoration: none;
 }
 
@@ -733,6 +744,10 @@ ul#menu li.active a {
     padding: 20px;
 }
 
+.view .main-text {
+    padding: 20px 5px 20px 20px;
+}
+
 .main-text #left-col {
     width: 700px;
     padding-right: 10px;
@@ -741,9 +756,10 @@ ul#menu li.active a {
     float: left;
 }
 
-#main-text #right-col {
-    float:left;
-    width: 250px;
+.main-text #right-col {
+    width: 215px;
+    margin-left: 9px;
+    float: left;
 }
 
 .main-text-holder:first-letter {
@@ -756,6 +772,7 @@ ul#menu li.active a {
 }
 
 #right-col .gallery img {
+    padding-right: 5px;
     width: 100px;
 }
 
@@ -903,6 +920,14 @@ form .submitter {
     border-bottom: 1px solid #848484;
 }
 
+.user-page .user-menu-list li a {
+    color: #fff;
+}
+
+.user-page .user-menu-list li a:hover {
+    color: #FE8300;
+}
+
 .user-page .user-menu-list li:hover {
     color: #FE8300;
 }
@@ -935,6 +960,63 @@ form .submitter {
 
 .user-page #user-info-form {
     margin-top: 15px;
+}
+
+/* Admin options */
+
+.maincol.admin {
+    padding-bottom: 20px;
+}
+
+.admin-listview div {
+    float: left;
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
+}
+
+.line {
+    border-bottom: 2px solid #888;
+}
+
+.admin-listview-heading div {
+    font-weight: bold;
+    text-align: center;
+    float: left;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.admin-listview .title, .admin-listview-heading .title {
+    width: 90px;
+}
+
+.admin-listview-heading .descr {
+    width: 280px;
+}
+.admin-listview .descr {
+    width: 280px;
+    text-align: left;
+}
+
+.admin-listview .photocount, .admin-listview-heading .photocount {
+    width: 50px;
+}
+
+.admin-listview .comment-count, .admin-listview-heading .comment-count {
+    width: 50px;
+}
+
+.admin-listview .user, .admin-listview-heading .user {
+    width: 100px;
+}
+
+.admin-listview .actions a.admin-delete {
+    color: #FE2E2E;
+}
+
+.admin-listview .actions a.admin-delete:hover {
+    text-decoration: underline;
 }
 
 /* Comments block */
@@ -1054,7 +1136,7 @@ form .submitter {
 }
 
 .object.listview .text {
-    padding-top: 15px;
+    padding-top: 5px;
     float: left;
     width: 600px;
 }

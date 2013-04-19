@@ -1,7 +1,7 @@
 <?php
 include("includes/db.php");
 include("includes/authcheck.php");
-//var_dump($_SESSION); var_dump($_POST);
+//var_dump($_SESSION); var_dump($_POST); die;
     if (isset($_POST) && isset($_GET['edit'])) {
         $data = $_POST;
         //Inserting in main info
@@ -18,6 +18,7 @@ include("includes/authcheck.php");
             unset($_SESSION['saved']);
             unset($_SESSION['edit']);
             unset($_SESSION['object_id']);
+            unset($_SESSION['gallery_id']);
             header('Location: ' . $baseUrl);
         }
     } elseif (isset($_POST) && !isset($_SESSION['object_id']) && !isset($_SESSION['saved'])) {
@@ -35,7 +36,7 @@ include("includes/authcheck.php");
         }
         $_SESSION['saved'] = true;
         $_SESSION['object_id'] = $object_id;
-        //var_dump($_SESSION); die;
+//        var_dump($_SESSION); die;
     } else {
         $data = $_POST;
         //Inserting in main info
@@ -51,6 +52,7 @@ include("includes/authcheck.php");
         }
         unset($_SESSION['saved']);
         unset($_SESSION['object_id']);
+        unset($_SESSION['gallery_id']);
         header('Location: ' . $baseUrl);
     }
 

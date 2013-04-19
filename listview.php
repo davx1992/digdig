@@ -1,7 +1,6 @@
 <?php include("includes/db.php"); ?>
 <?php
 /* Izņemmam no datubāzes objekta informāciju */
-$data = getData();
 $result = mysql_query("
             SELECT objects.*, object_options.main_text
             FROM objects, object_options
@@ -29,7 +28,7 @@ $result = mysql_query("
 <div id="cont-wrapper">
     <div id="content">
         <h2 class="home-heading main view">
-            <span>List view</span>
+            <span>Objects list</span>
         </h2>
 
         <div id="left-col">
@@ -38,8 +37,9 @@ $result = mysql_query("
                 <?php
                     $text = $object['main_text'];
                     $text = (strlen($text) > 1000) ? substr($text, 0, 1000) . '...' : $text;
+                    $text = str_replace("<p>&nbsp;</p>","",$text);
 
-                    /* Iznemu objekta reitingus */
+                /* Iznemu objekta reitingus */
                     $reitings = mysql_query("
                             SELECT ratings.*
                             FROM ratings

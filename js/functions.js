@@ -73,6 +73,7 @@ $(document).ready(function () {
         editor_selector:"mceEditor",
         theme:'advanced'
     });
+
     //end
     $('#addPhotoLink').click(function () {
         var dummie = $(this);
@@ -146,7 +147,8 @@ $(document).ready(function () {
         if($('textarea.comment').val() != '') {
             $.post(base + 'ajax_comments.php', $('#add_comment').serialize(), function(data){
                 $('.comments-list').append(data);
-                $('textarea.comment').val('');
+                $('textarea.commenttext').val('');
+                if ($('.no-comment').length != 0) $('.no-comment').remove();
                 $('.comments-list .comment:last').fadeIn();
                 $('.comments-count span').html(Number($('.comments-count span').text())+1);
             });
