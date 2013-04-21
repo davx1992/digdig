@@ -748,6 +748,14 @@ ul#menu li.active a {
     padding: 20px 5px 20px 20px;
 }
 
+.view .main-text-holder h3,
+.view .main-text-holder h2,
+.view .main-text-holder h4,
+.view .main-text-holder h5,
+.view .main-text-holder h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .main-text #left-col {
     width: 700px;
     padding-right: 10px;
@@ -1149,7 +1157,21 @@ form .submitter {
 }
 
 .object.listview h3 {
+    width: 400px;
     font-size: 22px;
+}
+
+.home-heading form {
+    right: 20px;
+    position: relative;
+    float: right;
+    top: -5px;
+    width: 180px;
+}
+
+.home-heading .search {
+    width: 180px;
+    height: 25px;
 }
 
 .object.listview .rate-stars {
@@ -1158,8 +1180,38 @@ form .submitter {
     left: 415px;
 }
 
+.nothing {
+    font-size: 12px;
+    text-align: center;
+    padding-top: 15px;
+}
 
+.paginator {}
 
+.paginator-holder-outer {
+    float: left;
+    position: relative;
+    left: 50%;
+}
+
+.paginator-holder-inner {
+    float: left;
+    position: relative;
+    left: -50%;
+}
+
+.paginator .page {
+    border: 1px solid #888;
+    font-size: 12px;
+    margin-left: 5px;
+    padding: 2px 5px;
+    background: #A4A4A4;
+    color: #fff;
+}
+
+.paginator .page.active {
+    background: #DAD9D5;
+}
 
 
 

@@ -1,11 +1,51 @@
 <?php include("includes/db.php"); ?>
 <?php
-/* Izņemmam no datubāzes objekta informāciju */
-$result = mysql_query("
+    $perPage = 5;
+    /* Mekleshanas skripts */
+    if (isset($_POST['search'])) {
+        $string = $_POST['search'];
+        $flag = true;
+        $result = mysql_query("
             SELECT objects.*, object_options.main_text
-            FROM objects, object_options
-            WHERE objects.id = object_options.object_id AND object_options.main_text != ''");
+            FROM objects
+            LEFT JOIN object_options ON object_options.object_id = objects.id
+            WHERE objects.id = object_options.object_id
+            AND objects.title LIKE '%" . $string . "%'
+            OR objects.description LIKE '%" . $string . "%'
+            OR objects.city LIKE '%" . $string . "%'
+            OR object_options.main_text LIKE '%" . $string . "%'
+            ");
+    }
+    /* Veidojam paginatoru */
+    if (isset($_GET['page'])) {
+        $start = ($_GET['page'] - 1) * $perPage;
+        $cpage = $_GET['page'];
+    } else {
+        $start = 0;
+        $cpage = 1;
+    }
 
+    $objectCount = mysql_query("SELECT COUNT(objects.id) AS object_count FROM objects WHERE 1");
+    $objectCount = mysql_fetch_array($objectCount, MYSQL_ASSOC);
+
+    if (isset($result)) {
+        $objectCount = mysql_num_rows($result);
+    }
+
+    if ($objectCount['object_count'] > $perPage){
+        $pages = ceil($objectCount['object_count'] / $perPage);
+    } else {
+        $pages = 0;
+    }
+
+    if (!isset($flag)) {
+        /* Izņemmam no datubāzes objekta informāciju */
+        $result = mysql_query("
+        SELECT objects.*, object_options.main_text
+        FROM objects, object_options
+        WHERE objects.id = object_options.object_id AND object_options.main_text != ''
+        LIMIT " . $start . "," . $perPage . "");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,6 +69,9 @@ $result = mysql_query("
     <div id="content">
         <h2 class="home-heading main view">
             <span>Objects list</span>
+            <form method="POST" action="<?php echo $baseUrl?>listview.php">
+                <input name="search" class="search"/>
+            </form>
         </h2>
 
         <div id="left-col">
@@ -102,7 +145,24 @@ $result = mysql_query("
                 <br style="clear: both;"/>
             </div>
             <?php endwhile ?>
+            <?php if ($objectCount == 0): ?>
+                <div class="nothing">No objects found.</div>
+            <?php endif ?>
         </div>
+        <?php if ($pages > 0): ?>
+            <div class="paginator">
+                <div class="paginator-holder-outer">
+                    <div class="paginator-holder-inner">
+                    <?php for ($i = 1; $i <= $pages; $i++): ?>
+                        <?php if ($cpage == $i) $class = 'active' ?>
+                        <a class="page <?php echo $class ?>" href="<?php echo $baseUrl ?>listview.php?page=<?php echo $i ?>"><?php echo $i ?></a>
+                        <?php $class = ''; ?>
+                    <?php endfor ?>
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        <?php endif ?>
         <br style="clear: both;"/>
     </div>
 </div>
