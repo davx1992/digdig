@@ -128,6 +128,7 @@
                 <div class="main-text-holder <?php if (isset($editable)) echo 'editable' ?>">
                     <?php echo $object['main_text'] ?>
                 </div>
+                <!-- Komentaari -->
                 <div class="comments-block">
                     <p class="comments-count">
                         <strong>Total comments: <span><?php echo mysql_num_rows($comments) ?></span></strong>
@@ -165,6 +166,9 @@
                                 <div class="comment-text">
                                     <?php echo $comment['comment'] ?>
                                 </div>
+                                <?php if ($comment['user_id'] == $_SESSION['User']['id'] || $_SESSION['User']['role'] > 0): ?>
+                                    <a class="comment-delete" onclick="if(!confirm('Are you sure, about deletion?')) return false;" href="<?php echo $baseUrl ?>commentdelete.php?comment=<?php echo $comment['id'] ?>">[delete]</a>
+                                <?php endif ?>
                             </div>
                         <?php
                             endwhile;
@@ -190,7 +194,6 @@
             </div>
             <br style="clear: both;"/>
         </div>
-        <?php //print_r($object); ?>
     </div>
 </div>
 <div id="footer-wrap">

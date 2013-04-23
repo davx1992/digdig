@@ -2,6 +2,7 @@
 <?php include('includes/authcheck.php') ?>
 <?php
     if(isset($_POST['commenttext'])) {
+        $_POST['commenttext'] = preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $_POST['commenttext']);
         $result = mysql_query("INSERT INTO comments(`user_id`, `object_id`, `comment`, `date`)
         VALUES ('" . $_SESSION['User']['id'] . "','" . $_POST['object_id'] . "','" . $_POST['commenttext'] . "','" . date('Y-m-d H:i:s') . "')", $db);
         if($result){ ?>

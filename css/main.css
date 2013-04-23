@@ -1087,10 +1087,22 @@ form .submitter {
 }
 
 .comment {
+    position: relative;
     margin-left: 15px;
     padding-bottom: 10px;
     margin-top: 15px;
     border-bottom: 1px solid #A3A6A3;
+}
+
+.comment .comment-delete {
+    position: absolute;
+    right: 20px;
+    top: 18px;
+    color: #FE2E2E;
+}
+
+.comment .comment-delete:hover {
+    text-decoration: underline;
 }
 
 .no-comment {
