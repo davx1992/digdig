@@ -1,5 +1,6 @@
     <!-- Stilu pievienoshana -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/print.css" media="print">
     <!-- END -->
     
     <script type="text/javascript"

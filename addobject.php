@@ -2,6 +2,7 @@
 include("includes/db.php");
 include("includes/authcheck.php");
 ?>
+<?php $_SESSION['menu'] = '' ?>
 <!DOCTYPE html>
 <html>
 <head>

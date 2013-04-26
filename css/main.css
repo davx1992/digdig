@@ -170,6 +170,7 @@ a {
 .object-small a {
     position: absolute;
     top: 0;
+    left: 0;
     height: 190px;
     color:#fff;
     font-family: Arial, Helvetica, sans-serif;
@@ -555,8 +556,14 @@ ul#menu li.user_menu ul {
     position: absolute;
     background: #424242;
 }
+
 ul#menu li.user_menu ul li:hover {
     background: #6E6E6E;
+    border: none;
+}
+
+ul#menu li.user_menu.active {
+    background: #424242;
     border: none;
 }
 
@@ -587,6 +594,11 @@ ul#menu li a {
 }
 
 ul#menu li:hover {
+    background: #2D2F2F;
+    border-bottom: 5px solid #000000;
+}
+
+ul#menu li.active {
     background: #2D2F2F;
     border-bottom: 5px solid #000000;
 }
@@ -764,6 +776,13 @@ ul#menu li.active a {
     float: left;
 }
 
+.print {
+    float: right;
+    width: 18px;
+    height: 18px;
+    background: url('../img/printer.png') no-repeat center;
+}
+
 .main-text #right-col {
     width: 215px;
     margin-left: 9px;
@@ -782,6 +801,7 @@ ul#menu li.active a {
 #right-col .gallery img {
     padding-right: 5px;
     width: 100px;
+    border: none;
 }
 
 .rate-stars {
@@ -1173,6 +1193,38 @@ form .submitter {
     font-size: 22px;
 }
 
+.home-heading.listview .sort-by {
+    float: right;
+    position: relative;
+    right: 30px;
+    top: -5px;
+}
+
+.home-heading.listview .sort-by span {
+    font-size: 12px;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 0;
+    padding: 0;
+    text-transform: none;
+}
+
+.home-heading.listview .sort-by a span:hover {
+    text-decoration: underline;
+}
+
+.home-heading.listview .sort-by a.active span {
+    text-decoration: underline;
+}
+
+.home-heading.listview .sort-by span.divider {
+    padding: 0 10px;
+}
+
+.home-heading.listview .sort-by a {
+    margin-right: -15px;
+}
+
 .home-heading form {
     right: 20px;
     position: relative;
@@ -1184,6 +1236,8 @@ form .submitter {
 .home-heading .search {
     width: 180px;
     height: 25px;
+    padding-left: 10px;
+    color: #888;
 }
 
 .object.listview .rate-stars {
@@ -1224,11 +1278,6 @@ form .submitter {
 .paginator .page.active {
     background: #DAD9D5;
 }
-
-
-
-
-
 
 
 

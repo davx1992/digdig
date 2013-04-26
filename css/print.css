@@ -1,0 +1,17 @@
+@media {
+    #footer-wrap, #menu-wrap, .main-text #right-col, .comments-block, #header-wrap {
+        display:none;
+    }
+
+    .main-text #left-col {
+        width: 930px;
+        line-height: 2.3em;
+        border: none;
+        font-size: 14px;
+        float: left;
+    }
+
+    #cont-wrapper {
+        padding-top: 100px;
+    }
+}

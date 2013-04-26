@@ -1,4 +1,6 @@
 <?php include("includes/db.php");
+$_SESSION['menu'] = '';
+
 if (isset($_GET['logout'])) {
     unset($_SESSION['User']);
 }

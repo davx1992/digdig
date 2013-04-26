@@ -1,4 +1,5 @@
 <?php include("includes/db.php"); ?>
+<?php $_SESSION['menu'] = 'home' ?>
 <?php
     $result = mysql_query('
         SELECT gallery.*, objects.description

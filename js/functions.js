@@ -15,6 +15,9 @@ $(document).ready(function () {
     });
 
     $('.rate-stars .star').click(function(){
+        if (!authorized) {
+            return false;
+        }
         if ($('.rated').length == 0) {
             var last = $('.rate-stars .star:last').index();
             var count = $(this).index();
@@ -27,6 +30,28 @@ $(document).ready(function () {
         }
         return false;
     });
+
+    //Taisam savu placeholderi
+    var placeholderValue = '';
+    $('.placeholder').focus(function(){
+        placeholderValue = $(this).val();
+        $(this).val('');
+    }).blur(function(){
+        $(this).val(placeholderValue)
+    });
+
+    //Opacity prieksh listview mainbildes
+    $('.object.listview .photo a, .object.listview h3').hover(function () {
+        $(this).animate({'opacity': 0.7});
+    }, function () {
+        $(this).animate({'opacity': 1});
+    });
+
+    //Liekam aktivus izvelnes elementus
+    $('#menu li').removeClass('active');
+    if (activeMenu != '') {
+        $('#menu #' + activeMenu).parent('li').addClass('active');
+    }
 
     $('.user_menu').mouseenter(function(){
         $(this).children('ul').show();

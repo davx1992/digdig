@@ -1,19 +1,32 @@
 <?php include("includes/db.php"); ?>
+<?php $_SESSION['menu'] = 'objects' ?>
 <?php
+    /* Kartoshana */
+    if (isset($_GET['sort'])) {
+        $_SESSION['sort'] = $_GET['sort'];
+        $sortQuery = 'ORDER BY ' .  $_SESSION['sort'] . ' DESC';
+    } elseif (isset($_SESSION['sort'])) {
+        $sortQuery = 'ORDER BY ' .  $_SESSION['sort'] . ' DESC';
+    } else {
+        $sortQuery = '';
+    }
     $perPage = 5;
     /* Mekleshanas skripts */
     if (isset($_POST['search'])) {
         $string = $_POST['search'];
         $flag = true;
         $result = mysql_query("
-            SELECT objects.*, object_options.main_text
+            SELECT objects.*, object_options.main_text, COUNT(pop.id) AS popularity,
+            ((SELECT SUM(ratings.rate) FROM ratings WHERE ratings.object_id = objects.id) / (SELECT COUNT(rs.id) FROM ratings AS rs WHERE rs.object_id = objects.id)) AS rate
             FROM objects
+            LEFT JOIN popularity AS pop ON pop.object_id = objects.id
             LEFT JOIN object_options ON object_options.object_id = objects.id
-            WHERE objects.id = object_options.object_id
-            AND objects.title LIKE '%" . $string . "%'
+            WHERE objects.title LIKE '%" . $string . "%'
             OR objects.description LIKE '%" . $string . "%'
             OR objects.city LIKE '%" . $string . "%'
             OR object_options.main_text LIKE '%" . $string . "%'
+            GROUP BY objects.id
+            " . $sortQuery . "
             ");
     }
     /* Veidojam paginatoru */
@@ -41,10 +54,14 @@
     if (!isset($flag)) {
         /* Izņemmam no datubāzes objekta informāciju */
         $result = mysql_query("
-        SELECT objects.*, object_options.main_text
-        FROM objects, object_options
-        WHERE objects.id = object_options.object_id AND object_options.main_text != ''
-        LIMIT " . $start . "," . $perPage . "");
+            SELECT objects.*, object_options.main_text, COUNT(pop.id) AS popularity,
+            ((SELECT SUM(ratings.rate) FROM ratings WHERE ratings.object_id = objects.id) / (SELECT COUNT(rs.id) FROM ratings AS rs WHERE rs.object_id = objects.id)) AS rate
+            FROM objects
+            LEFT JOIN popularity AS pop ON pop.object_id = objects.id
+            LEFT JOIN object_options ON object_options.object_id = objects.id
+            GROUP BY objects.id
+            " . $sortQuery . "
+            LIMIT " . $start . "," . $perPage . "");
     }
 ?>
 <!DOCTYPE html>
@@ -67,11 +84,19 @@
 </div>
 <div id="cont-wrapper">
     <div id="content">
-        <h2 class="home-heading main view">
+        <h2 class="home-heading main listview">
             <span>Objects list</span>
             <form method="POST" action="<?php echo $baseUrl?>listview.php">
-                <input name="search" class="search"/>
+                <input name="search" class="search placeholder" value="Search:"/>
             </form>
+            <p class="sort-by">
+                <span>Sort By:</span>
+                <?php (isset($_SESSION['sort']) && $_SESSION['sort'] == 'rate') ? $class = 'active' : $class = '' ?>
+                <a href="?sort=rate" class="<?php echo $class ?>"><span>Rating</span> / </a>
+                <span class="divider">/</span>
+                <?php (isset($_SESSION['sort']) && $_SESSION['sort'] == 'popularity') ? $class = 'active' : $class = '' ?>
+                <a href="?sort=popularity" class="<?php echo $class ?>"><span>Popularity</span></a>
+            </p>
         </h2>
 
         <div id="left-col">

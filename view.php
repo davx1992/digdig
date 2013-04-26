@@ -1,7 +1,14 @@
 <?php include("includes/db.php"); ?>
+<?php $_SESSION['menu'] = 'objects' ?>
 <?php
-    /* Izņemmam no datubāzes objekta informāciju */
     $data = getData();
+    /* Ievietojam datubaze apmeklejuma ierakstu */
+        (isset($_SESSION['User'])) ? $user = $_SESSION['User']['id'] : $user = '';
+        $result = mysql_query("
+            INSERT INTO popularity (object_id, user_id, date)
+            VALUES ('" . $data['get']['id'] . "', '" . $user . "', '" . date('Y-m-d H:i:s') . "')");
+
+    /* Izņemmam no datubāzes objekta informāciju */
     $result = mysql_query("
             SELECT objects.*, object_options.main_text
             FROM objects, object_options
@@ -81,6 +88,11 @@
         var url = "<?php echo 'http://localhost/digdig/'?>";
         var coords = <?php echo $coord ?>;
         var object_id = <?php echo $data['get']['id'] ?>;
+        <?php if (isset($_SESSION['User'])): ?>
+            var authorized = true;
+        <?php else: ?>
+            var authorized = false;
+        <?php endif ?>
     </script>
 </head>
 <body onload="initObjectView(coords);" class="view">
@@ -128,6 +140,7 @@
                 <div class="main-text-holder <?php if (isset($editable)) echo 'editable' ?>">
                     <?php echo $object['main_text'] ?>
                 </div>
+                <a href="#" onclick="javascript:window.print()" class="print"></a>
                 <!-- Komentaari -->
                 <div class="comments-block">
                     <p class="comments-count">
@@ -166,8 +179,10 @@
                                 <div class="comment-text">
                                     <?php echo $comment['comment'] ?>
                                 </div>
-                                <?php if ($comment['user_id'] == $_SESSION['User']['id'] || $_SESSION['User']['role'] > 0): ?>
-                                    <a class="comment-delete" onclick="if(!confirm('Are you sure, about deletion?')) return false;" href="<?php echo $baseUrl ?>commentdelete.php?comment=<?php echo $comment['id'] ?>">[delete]</a>
+                                <?php if (isset($_SESSION['User'])): ?>
+                                    <?php if ($comment['user_id'] == $_SESSION['User']['id'] || $_SESSION['User']['role'] > 0): ?>
+                                        <a class="comment-delete" onclick="if(!confirm('Are you sure, about deletion?')) return false;" href="<?php echo $baseUrl ?>commentdelete.php?comment=<?php echo $comment['id'] ?>">[delete]</a>
+                                    <?php endif ?>
                                 <?php endif ?>
                             </div>
                         <?php
