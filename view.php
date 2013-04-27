@@ -15,6 +15,29 @@
             WHERE '" . $data['get']['id'] . "' = objects.id AND '" . $data['get']['id'] . "' = object_options.object_id");
     $object = mysql_fetch_array($result, MYSQL_ASSOC);
 
+    /* Saglabaju ka favorite */
+    if (isset($_GET['favorite']) && isset($_SESSION['User'])) {
+        $result = mysql_query("
+            SELECT favorite.*
+            FROM favorite
+            WHERE favorite.user_id = " . $_SESSION['User']['id'] . " AND favorite.object_id = " . $data['get']['id']);
+        if (!mysql_fetch_array($result, MYSQL_ASSOC)) {
+            $result = mysql_query("
+                INSERT INTO favorite(user_id, object_id, date)
+                VALUES ('" . $_SESSION['User']['id'] . "', '" . $data['get']['id'] . "', '" . date('Y-m-d H:i:s') . "')
+            ");
+        }
+    }
+
+    /* Parbaudu vai ir favorite */
+    if (isset($_SESSION['User'])) {
+        $result = mysql_query("
+            SELECT favorite.*
+            FROM favorite
+            WHERE favorite.user_id = " . $_SESSION['User']['id'] . " AND favorite.object_id = " . $data['get']['id']);
+        $favourite = mysql_fetch_array($result, MYSQL_ASSOC);
+    }
+
     /* Dabūnu koordinātes */
     $result = mysql_query("SELECT * FROM coordinates WHERE coordinates.object_id = '" . $data['get']['id'] . "'", $db);
     $coord = mysql_fetch_array($result, MYSQL_ASSOC);
@@ -100,6 +123,7 @@
     <?php include("includes/header.php"); ?>
 </div>
 <div id="cont-wrapper">
+    <a href="<?php echo $_SERVER['REQUEST_URI'] ?>&favorite=true" class="addToFavourite <?php echo ($favourite) ? 'red' : '' ?>" title="Add to favourite"></a>
     <div id="content">
         <?php if($editable): ?>
             <a class="editlink" href="<?php echo $baseUrl ?>editobject.php?id=<?php echo $data['get']['id'] ?>"><p class="rotate">Edit</p></a>
@@ -141,6 +165,13 @@
                     <?php echo $object['main_text'] ?>
                 </div>
                 <a href="#" onclick="javascript:window.print()" class="print"></a>
+                <a class="getCoordinates">Get coordinates</a>
+                <script type="text/javascript">
+                    $('.getCoordinates').click(function () {
+                        $(this).remove();
+                        $('.print').after('<input name="coordinates" class="coordinates" value="' + coords.coordx + ' ' + coords.coordy + '"/>');
+                    });
+                </script>
                 <!-- Komentaari -->
                 <div class="comments-block">
                     <p class="comments-count">

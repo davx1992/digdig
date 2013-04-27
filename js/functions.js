@@ -24,10 +24,18 @@ $(document).ready(function () {
             $('.rate-stars .star.on').each(function(){
                 $(this).addClass('rated');
             });
-            $.post(base + 'rate.php', { object_id: object_id, rate: Math.abs((count+1)-6) }, function(data){
-
-            });
+            $.post(base + 'rate.php', { object_id: object_id, rate: Math.abs((count+1)-6) }, function(data){});
         }
+        return false;
+    });
+
+    $('.addToFavourite').hover(function(){
+        $(this).animate({'right' : -50});
+    }, function() {
+        $(this).animate({'right' : -30});
+    });
+
+    $('.addToFavourite.red').click(function(){
         return false;
     });
 
