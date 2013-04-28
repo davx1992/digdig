@@ -42,6 +42,7 @@
         <div class="leftcol">
             <ul class="user-menu-list">
                 <li class="active"><a href="admin_objectlist.php">Admin object list</a></li>
+                <li><a href="admin_newsarticle.php">Add news article</a></li>
             </ul>
         </div>
 

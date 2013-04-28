@@ -35,11 +35,11 @@ include("includes/authcheck.php");
                         <span class="legend">Main information</span>
 
                         <div class="input">
-                            <input type="text" name="name" placeholder="Title"/>
+                            <input type="text" name="name" class="placeholder" place="Title" value="Title"/>
                         </div>
 
                         <div class="input">
-                            <input type="text" name="city" placeholder="City"/>
+                            <input type="text" name="city" class="placeholder" place="City" value="City"/>
                         </div>
                     </div>
 

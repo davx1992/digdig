@@ -51,6 +51,29 @@
         $pages = 0;
     }
 
+    if (isset($_SESSION['User'])) {
+        $result = mysql_query("
+            SELECT favorite.*
+            FROM favorite
+            WHERE favorite.user_id = " . $_SESSION['User']['id']);
+        if (mysql_fetch_array($result, MYSQL_ASSOC) && isset($_GET['showfavorite'])) {
+            $favouriteOn = true;
+            $result = mysql_query("
+                SELECT favorite.*, objects.*,  object_options.main_text, COUNT(pop.id) AS popularity,
+                ((SELECT SUM(ratings.rate) FROM ratings WHERE ratings.object_id = objects.id) / (SELECT COUNT(rs.id) FROM ratings AS rs WHERE rs.object_id = objects.id)) AS rate
+                FROM favorite
+                LEFT JOIN objects ON objects.id = favorite.object_id
+                LEFT JOIN popularity AS pop ON pop.object_id = objects.id
+                LEFT JOIN object_options ON object_options.object_id = objects.id
+                WHERE favorite.user_id = '". $_SESSION['User']['id'] ."'
+                GROUP BY objects.id " . $sortQuery);
+            $flag = true;
+            $pages = 0;
+        } elseif (mysql_fetch_array($result, MYSQL_ASSOC)) {
+            $favourite = true;
+        }
+    }
+
     if (!isset($flag)) {
         /* Izņemmam no datubāzes objekta informāciju */
         $result = mysql_query("
@@ -92,11 +115,14 @@
             <p class="sort-by">
                 <span>Sort By:</span>
                 <?php (isset($_SESSION['sort']) && $_SESSION['sort'] == 'rate') ? $class = 'active' : $class = '' ?>
-                <a href="?sort=rate" class="<?php echo $class ?>"><span>Rating</span> / </a>
+                <a href="<?php echo (!empty($_GET)) ? $_SERVER['REQUEST_URI'] . '&' : '?' ?>sort=rate" class="<?php echo $class ?>"><span>Rating</span> / </a>
                 <span class="divider">/</span>
                 <?php (isset($_SESSION['sort']) && $_SESSION['sort'] == 'popularity') ? $class = 'active' : $class = '' ?>
-                <a href="?sort=popularity" class="<?php echo $class ?>"><span>Popularity</span></a>
+                <a href="<?php echo (!empty($_GET)) ? $_SERVER['REQUEST_URI'] . '&' : '?' ?>sort=popularity" class="<?php echo $class ?>"><span>Popularity</span></a>
             </p>
+            <?php if (isset($_SESSION['User']) && isset($favourite) || isset($favouriteOn)): ?>
+                <a class="showFavorite <?php echo (isset($favouriteOn)) ? 'active' : ''?>" href="?showfavorite=true" title="Show favourite"></a>
+            <?php endif ?>
         </h2>
 
         <div id="left-col">

@@ -29,6 +29,13 @@ $(document).ready(function () {
         return false;
     });
 
+    $('.add_button.addObj').click(function(){
+        if ($('#coordx').val() == '' || $('#coordy').val() == '') {
+            $('#canva-hider-addobject').css('border', '2px solid #FE2E2E');
+            return false;
+        }
+    });
+
     $('.addToFavourite').hover(function(){
         $(this).animate({'right' : -50});
     }, function() {
@@ -42,10 +49,14 @@ $(document).ready(function () {
     //Taisam savu placeholderi
     var placeholderValue = '';
     $('.placeholder').focus(function(){
-        placeholderValue = $(this).val();
-        $(this).val('');
+        placeholderValue = $(this).attr('place');
+        if ($(this).val() == placeholderValue) {
+            $(this).val('');
+        }
     }).blur(function(){
-        $(this).val(placeholderValue)
+            if ($(this).val() == '') {
+                $(this).val(placeholderValue)
+            }
     });
 
     //Opacity prieksh listview mainbildes
@@ -104,6 +115,14 @@ $(document).ready(function () {
         width:'900',
         height:'400',
         editor_selector:"mceEditor",
+        theme:'advanced'
+    });
+
+    tinyMCE.init({
+        mode:'textareas',
+        width:'700',
+        height:'400',
+        editor_selector:"mceEditorArticle",
         theme:'advanced'
     });
 
