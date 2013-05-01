@@ -11,8 +11,7 @@
     <ul id="menu">
         <li><a href="<?php echo $baseUrl ?>" id="home">Home<span>Welcome</span></a></li>
         <li><a href="<?php echo $baseUrl ?>listview.php" id="objects">Objects<span>Explore</span></a></li>
-        <li><a href="">Forum<span>Discuss</span></a></li>
-        <li><a href="">News<span>Read</span></a></li>
+        <li><a href="<?php echo $baseUrl ?>news.php" id="news">News<span>Read</span></a></li>
         <li><a href="">About us<span>Get to know</span></a></li>
         <?php if (isset($_SESSION['User'])): ?>
             <li class="user_menu"><a href="#" id="user"><?php echo $_SESSION['User']['email'] ?></a>

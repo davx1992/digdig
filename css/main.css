@@ -1231,6 +1231,32 @@ button.submit {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
+/* News section */
+.news.listview {
+    position: relative;
+}
+
+.news.listview .left {
+    float: left;
+    padding-top: 8px;
+    padding-left: 30px;
+}
+
+.news.listview .left a {
+    cursor: pointer;
+}
+
+.news.listview .left .date {
+    font-size: 11px;
+}
+
+.news.listview .text {
+    font-size: 13px;
+    padding: 10px 15px 15px 15px;
+    float: right;
+    width: 600px;
+}
+
 /* Object list view page */
 .object.listview {
     padding: 20px;
