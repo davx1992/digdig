@@ -84,6 +84,7 @@ a {
 }
 
 #sociale ul li {
+    cursor: pointer;
     margin-top:3px;
 }
 
@@ -244,7 +245,7 @@ a {
 }
 
 #footer > ul li h3 {
-    padding-left: 15px;
+    padding-left: 25px;
 }
 
 #footer > ul li ul.externallinks a {
@@ -253,6 +254,18 @@ a {
 
 #footer > ul li ul li {
     padding-top: 10px;
+}
+
+#footer .footer-news {
+    padding-left: 15px;
+}
+
+#footer .footer-news h4 {
+    font-size: 13px;
+}
+
+#footer .footer-news .date {
+    font-size: 11px;
 }
 
 /*    FORM ELEMENTS  */
@@ -691,6 +704,13 @@ ul#menu li.active a {
     padding-top:6px;
 }
 
+/*    ABOUT US     */
+.aboutus .text {
+    line-height: 1.6em;
+    font-size: 12px;
+    padding: 10px 25px 10px 25px;
+}
+
 /*    HEADINGS     */
 
 .home-heading {
@@ -760,6 +780,18 @@ ul#menu li.active a {
 
 .view .main-text {
     padding: 20px 5px 20px 20px;
+}
+
+.view .social-block {
+    padding-top: 15px;
+}
+
+.view .social-block > div.facebook {
+    width: 100px;
+}
+
+.view .social-block > div {
+    float: left;
 }
 
 .showFavorite {
@@ -1233,13 +1265,20 @@ button.submit {
 
 /* News section */
 .news.listview {
+    border-bottom: 1px solid #DAD9D5;
+    margin-left: 30px;
+    margin-right: 30px;
     position: relative;
+}
+
+.news.listview.last {
+    border: none;
 }
 
 .news.listview .left {
     float: left;
     padding-top: 8px;
-    padding-left: 30px;
+    padding-left: 15px;
 }
 
 .news.listview .left a {

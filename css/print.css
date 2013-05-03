@@ -1,5 +1,5 @@
 @media {
-    #footer-wrap, #menu-wrap, .main-text #right-col, .comments-block, #header-wrap {
+    .social-block, #footer-wrap, #menu-wrap, .main-text #right-col, .comments-block, #header-wrap {
         display:none;
     }
 

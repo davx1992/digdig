@@ -29,6 +29,7 @@
         }
     }
 
+    $favourite = false;
     /* Parbaudu vai ir favorite */
     if (isset($_SESSION['User'])) {
         $result = mysql_query("
@@ -172,6 +173,17 @@
                         $('.print').after('<input name="coordinates" class="coordinates" value="' + coords.coordx + ' ' + coords.coordy + '"/>');
                     });
                 </script>
+                <div class="social-block">
+                    <?php  $url = urlencode('http://localhost/' . $_SERVER['REQUEST_URI']); ?>
+                    <div class="facebook">
+                        <iframe src="//www.facebook.com/plugins/like.php?href=<?php echo $url ?>&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=173377879484353"
+                                scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+                    </div>
+                    <div class="twitter">
+                        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </div>
+                </div>
                 <!-- Komentaari -->
                 <div class="comments-block">
                     <p class="comments-count">

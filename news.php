@@ -54,8 +54,10 @@
         </h2>
 
         <div id="left-col">
+            <?php $number = mysql_num_rows($result); ?>
+            <?php $i = 1; ?>
             <?php while ($object = mysql_fetch_array($result, MYSQL_ASSOC)): ?>
-                <div class="news listview">
+                <div class="news listview <?php echo ($number == $i) ? 'last' : '' ?>">
                     <?php
                         $text = $object['main_text'];
                         $text = str_replace("<p>&nbsp;</p>","",$text);
@@ -70,9 +72,13 @@
                     <div class="text">
                     <!-- Ievietoju objekta tekstu -->
                         <?php echo $text ?>
+                        <?php if (isset($_SESSION['User']) && $_SESSION['User']['role'] >=2 ): ?>
+                            <a class="edit-news" href="<?php echo $baseUrl ?>admin_editnewsarticle.php?id=<?php echo $object['id'] ?>">[edit]</a>
+                        <?php endif ?>
                     </div>
                     <br style="clear: both;"/>
                 </div>
+            <?php $i++; ?>
             <?php endwhile ?>
             <?php if ($objectCount == 0): ?>
                 <div class="nothing">No objects found.</div>

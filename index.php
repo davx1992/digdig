@@ -31,7 +31,9 @@
         $result = mysql_query('
                     SELECT gallery.*, objects.description
                     FROM gallery, objects
-                    WHERE gallery.object_id = "' . $reiting['object_id'] . '" AND objects.description != ""');
+                    WHERE gallery.object_id = "' . $reiting['object_id'] . '"
+                    AND objects.description != ""
+                    AND objects.id = gallery.object_id');
         $object = mysql_fetch_array($result, MYSQL_ASSOC);
         $picres = mysql_query('
                         SELECT pictures.*

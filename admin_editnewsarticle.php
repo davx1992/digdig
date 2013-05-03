@@ -1,13 +1,20 @@
 <?php include("includes/db.php");?>
 <?php include("includes/authcheck.php"); ?>
 <?php if ($_SESSION['User']['role'] < 2) header('Location: ' . $baseUrl . 'user.php') ?>
+<?php if (!isset($_GET) && !isset($_GET['id']) && !isset($_POST)) header('Location: ' . $baseUrl . 'admin_newsarticle.php') ?>
 <?php
+    if (isset($_GET['id'])) {
+        $result = mysql_query('SELECT * FROM news WHERE id = "'. $_GET['id'] .'"');
+        $edit = mysql_fetch_array($result, MYSQL_ASSOC);
+    }
+    var_dump($_POST);
     if (isset($_POST) && !empty($_POST)) {
         $result = mysql_query("
-            INSERT INTO news (user_id, title, main_text, date)
-            VALUES ('" . $_SESSION['User']['id'] . "', '" . $_POST['title'] . "', '" . $_POST['main_text'] . "', '" . date('Y-m-d H:i:s') . "')");
+            UPDATE news SET title = '" . $_POST['title']. "', main_text = '" . $_POST['main_text']. "'
+            WHERE news.id = '" . $_POST['id'] . "'");
             $error['type'] = 'success';
             $error['text'] = 'Succefully added article!';
+        header('Location: ' . $baseUrl . 'admin_newsarticle.php');
     }
 ?>
 
@@ -48,12 +55,13 @@
             <?php if (isset($error)): ?>
                 <div class="<?php echo $error['type'] ?>"><span><?php echo $error['text'] ?></span></div>
             <?php endif; ?>
-            <form id="addNewsArticle" action="admin_newsarticle.php" method="POST">
+            <form id="addNewsArticle" action="admin_editnewsarticle.php" method="POST">
                 <div class="input">
-                    <input type="text" name="title" class="placeholder" place="Title" value="Title"/>
+                    <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
+                    <input type="text" name="title" class="placeholder" place="Title" value="<?php echo $edit['title'] ?>"/>
                 </div>
                 <div class="input">
-                    <textarea class="mceEditorArticle" name="main_text"></textarea>
+                    <textarea class="mceEditorArticle" name="main_text"><?php echo $edit['main_text'] ?></textarea>
                 </div>
                 <button type="submit" class="submit">Submit</button>
             </form>

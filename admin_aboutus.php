@@ -1,10 +1,10 @@
 <?php include("includes/db.php");?>
 <?php include("includes/authcheck.php"); ?>
-<?php if ($_SESSION['User']['role'] < 2) header('Location: ' . $baseUrl . 'user.php') ?>
+<?php if ($_SESSION['User']['role'] < 3) header('Location: ' . $baseUrl . 'user.php') ?>
 <?php
     if (isset($_POST) && !empty($_POST)) {
         $result = mysql_query("
-            INSERT INTO news (user_id, title, main_text, date)
+            INSERT INTO articles (user_id, title, main_text, date)
             VALUES ('" . $_SESSION['User']['id'] . "', '" . $_POST['title'] . "', '" . $_POST['main_text'] . "', '" . date('Y-m-d H:i:s') . "')");
             $error['type'] = 'success';
             $error['text'] = 'Succefully added article!';
@@ -37,9 +37,9 @@
         <div class="leftcol">
             <ul class="user-menu-list">
                 <li><a href="admin_objectlist.php">Admin object list</a></li>
-                <li class="active"><a href="admin_newsarticle.php">Add news article</a></li>
+                <li><a href="admin_newsarticle.php">Add news article</a></li>
                 <?php if ($_SESSION['User']['role'] == 3): ?>
-                    <li><a href="admin_aboutus.php">About us</a></li>
+                    <li class="active"><a href="admin_aboutus.php">About us</a></li>
                 <?php endif ?>
             </ul>
         </div>
@@ -48,7 +48,7 @@
             <?php if (isset($error)): ?>
                 <div class="<?php echo $error['type'] ?>"><span><?php echo $error['text'] ?></span></div>
             <?php endif; ?>
-            <form id="addNewsArticle" action="admin_newsarticle.php" method="POST">
+            <form id="addNewsArticle" action="admin_aboutus.php" method="POST">
                 <div class="input">
                     <input type="text" name="title" class="placeholder" place="Title" value="Title"/>
                 </div>

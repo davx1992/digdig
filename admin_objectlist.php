@@ -30,7 +30,7 @@
         var url = "<?php echo 'http://localhost/digdig/'?>";
     </script>
 </head>
-<body onload="initializeUserObjects(<?php echo $_SESSION['User']['id']?>);" class="user-page">
+<body class="user-page">
 <div id="header-wrap">
     <?php include("includes/header.php"); ?>
 </div>
@@ -43,6 +43,9 @@
             <ul class="user-menu-list">
                 <li class="active"><a href="admin_objectlist.php">Admin object list</a></li>
                 <li><a href="admin_newsarticle.php">Add news article</a></li>
+                <?php if ($_SESSION['User']['role'] == 3): ?>
+                    <li><a href="admin_aboutus.php">About us</a></li>
+                <?php endif ?>
             </ul>
         </div>
 

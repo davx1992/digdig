@@ -29,7 +29,7 @@
             <ul class="user-menu-list">
                 <li class="your-objects active">Your objects</li>
                 <li class="user-information">User information</li>
-                <?php if ($_SESSION['User']['role'] == 2): ?>
+                <?php if ($_SESSION['User']['role'] > 0): ?>
                     <li><a href="admin_objectlist.php">Admin options</a></li>
                 <?php endif ?>
             </ul>

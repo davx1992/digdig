@@ -11,12 +11,35 @@
         <li>
             <h3>Who we are?</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                <?php
+                    $result = mysql_query('SELECT * FROM articles WHERE title = "About Us"');
+                    $article = mysql_fetch_array($result, MYSQL_ASSOC);
+                ?>
+                <?php $text = (strlen($article['main_text']) > 450) ? substr($article['main_text'], 0, 450) . '...' : $article['main_text']; ?>
+                <?php echo $text ?>
             </p>
         </li>
         <li>
-            <h3>We on twitter</h3>
+            <h3>Latest news</h3>
+            <div>
+                <?php
+                $result = mysql_query("
+                    SELECT news.*
+                    FROM news
+                    ORDER BY date DESC
+                    LIMIT 4");
+                ?>
+                <?php while ($news = mysql_fetch_array($result, MYSQL_ASSOC)): ?>
+                    <div class="footer-news">
+                        <a class="listview-heading">
+                            <h4><?php echo $news['title'] ?></h4>
+                        </a>
+                        <p class="date">
+                            <span><?php echo date('Y-m-d H:i:s' ,strtotime($news['date'])) ?></span>
+                        </p>
+                    </div>
+                <?php endwhile ?>
+            </div>
         </li>
     </ul>
 </div>
