@@ -1,7 +1,6 @@
 <?php
 include("includes/db.php");
 include("includes/authcheck.php");
-//var_dump($_SESSION); var_dump($_POST); die;
     if (isset($_POST) && isset($_GET['edit'])) {
         $data = $_POST;
         //Inserting in main info
@@ -9,6 +8,7 @@ include("includes/authcheck.php");
         $object_id = $_SESSION['object_id'];
         //Inserting texts
         $result = mysql_query("UPDATE object_options SET object_id='" . $object_id . "',main_text='" . $data['main_text'] . "' WHERE object_id='" . $object_id . "' ");
+        $_SESSION['edit'] = true;
 
         if (mysql_error() != '') {
             die('MySql error');
@@ -36,7 +36,7 @@ include("includes/authcheck.php");
         }
         $_SESSION['saved'] = true;
         $_SESSION['object_id'] = $object_id;
-//        var_dump($_SESSION); die;
+        echo $object_id;
     } else {
         $data = $_POST;
         //Inserting in main info

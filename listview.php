@@ -38,7 +38,7 @@
         $cpage = 1;
     }
 
-    $objectCount = mysql_query("SELECT COUNT(objects.id) AS object_count FROM objects WHERE 1");
+    $objectCount = mysql_query("SELECT COUNT(objects.id) AS object_count FROM objects WHERE objects.description != ''");
     $objectCount = mysql_fetch_array($objectCount, MYSQL_ASSOC);
 
     if (isset($result)) {
@@ -52,11 +52,11 @@
     }
 
     if (isset($_SESSION['User'])) {
-        $result = mysql_query("
+        $favourites = mysql_query("
             SELECT favorite.*
             FROM favorite
             WHERE favorite.user_id = " . $_SESSION['User']['id']);
-        if (mysql_fetch_array($result, MYSQL_ASSOC) && isset($_GET['showfavorite'])) {
+        if (mysql_fetch_array($favourites, MYSQL_ASSOC) && isset($_GET['showfavorite'])) {
             $favouriteOn = true;
             $result = mysql_query("
                 SELECT favorite.*, objects.*,  object_options.main_text, COUNT(pop.id) AS popularity,
@@ -69,7 +69,7 @@
                 GROUP BY objects.id " . $sortQuery);
             $flag = true;
             $pages = 0;
-        } elseif (mysql_fetch_array($result, MYSQL_ASSOC)) {
+        } elseif (isset($favourites) && mysql_fetch_array($favourites, MYSQL_ASSOC)) {
             $favourite = true;
         }
     }
@@ -82,6 +82,7 @@
             FROM objects
             LEFT JOIN popularity AS pop ON pop.object_id = objects.id
             LEFT JOIN object_options ON object_options.object_id = objects.id
+            WHERE object_options.main_text!=''
             GROUP BY objects.id
             " . $sortQuery . "
             LIMIT " . $start . "," . $perPage . "");
@@ -110,7 +111,7 @@
         <h2 class="home-heading main listview">
             <span>Objects list</span>
             <form method="POST" action="<?php echo $baseUrl?>listview.php">
-                <input name="search" class="search placeholder" value="Search:"/>
+                <input name="search" class="search placeholder" place="Search:" value="Search:"/>
             </form>
             <p class="sort-by">
                 <span>Sort By:</span>

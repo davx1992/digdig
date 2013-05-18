@@ -129,8 +129,9 @@ $(document).ready(function () {
     //end
     $('#addPhotoLink').click(function () {
         var dummie = $(this);
-        $.post("objectsaver.php", $('#addObjectForm').serialize(), function (data) {
-
+        $.post("objectsaver.php", $('#addObjectForm').serialize(), function(data) {
+            var objectId = data;
+            console.log(objectId);
         });
         $.fancybox.open({
             href:'addphotos.php',
@@ -143,7 +144,7 @@ $(document).ready(function () {
             scrolling:'no',
             autoSize:false,
             afterClose:function () {
-                $('.addObj').attr('onclick', '');
+                $('.addObj').removeAttr('disabled');
                 dummie.remove();
             }
         });

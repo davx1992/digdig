@@ -124,12 +124,6 @@ include("includes/authcheck.php");
         <h3 class="fancyHeading">
             <span>Add photos</span>
         </h3>
-
-        <div class="galleryNamer">
-            <form method="post">
-                <input value="United gallery" type="text" />
-            </form>
-        </div>
     </div>
     <div class="addWrapper">
         <a id="pickfiles" class="addGallery" href="#">Add photos</a>

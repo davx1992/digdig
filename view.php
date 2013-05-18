@@ -124,7 +124,9 @@
     <?php include("includes/header.php"); ?>
 </div>
 <div id="cont-wrapper">
-    <a href="<?php echo $_SERVER['REQUEST_URI'] ?>&favorite=true" class="addToFavourite <?php echo ($favourite) ? 'red' : '' ?>" title="Add to favourite"></a>
+    <?php if (isset($_SESSION['User'])): ?>
+        <a href="<?php echo $_SERVER['REQUEST_URI'] ?>&favorite=true" class="addToFavourite <?php echo ($favourite) ? 'red' : '' ?>" title="Add to favourite"></a>
+    <?php endif ?>
     <div id="content">
         <?php if($editable): ?>
             <a class="editlink" href="<?php echo $baseUrl ?>editobject.php?id=<?php echo $data['get']['id'] ?>"><p class="rotate">Edit</p></a>

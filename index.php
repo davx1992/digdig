@@ -23,6 +23,7 @@
     $reitings = mysql_query('
         SELECT object_id, SUM(rate) / (SELECT COUNT(id) FROM ratings as ratingtb WHERE ratings.object_id = ratingtb.object_id) AS rate
         FROM ratings
+        RIGHT JOIN objects ON objects.id = ratings.object_id
         WHERE rate<=5
         GROUP BY object_id
         ORDER BY rate DESC LIMIT 4');

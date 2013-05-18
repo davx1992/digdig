@@ -13,6 +13,29 @@ include("includes/authcheck.php");
     <!-- Pievienojam skriptus -->
     <?php include("includes/scripts.php"); ?>
     <!-- END -->
+    <script type="text/javascript">
+        var objectId = false;
+        /* Lapas pameshanas parbaude */
+        $(document).ready(function(){
+            $('.add_button').click(function(){
+                window.onbeforeunload = '';
+//                if (!$(':.add_button["disabled"]')) {
+//                    mainSave = true;
+//                }
+            });
+            window.onbeforeunload = function (event) {
+                var message = 'Sure you want to leave?';
+                    event.returnValue = message;
+                return message;
+            }
+//            window.onunload = deleteObject();
+        });
+//        function deleteObject() {
+//            if (objectId && !mainSave) {  alert();
+//                $.post('editobject.php?delete=' + objectId, function() { alert(objectId);});
+//            }
+//        }
+    </script>
 </head>
 <body onload="initAddObject();">
 <div id="header-wrap">
@@ -44,7 +67,7 @@ include("includes/authcheck.php");
                     </div>
 
                     <br style="clear:both;"/>
-                    <input type="submit" class="add_button addObj" onclick="this.disabled=true;" value="Next">
+                    <input type="submit" class="add_button addObj" disabled value="Next">
                     <a class="addPhotosLink" id="addPhotoLink" >Add photos</a>
 
                     <div class="input text">
