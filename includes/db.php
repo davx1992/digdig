@@ -1,5 +1,4 @@
 <?php
-
 $db = mysql_connect("localhost","davx","Murafa");
 if (!$db)
   {
@@ -38,4 +37,9 @@ function secure() {
 
 secure();
 include('variables.php');
+
+if(preg_match('/(?i)msie [2-8]/',$_SERVER['HTTP_USER_AGENT'])) {
+    header('Location: ' . $baseUrl . 'ieblocker.php');
+}
+
 ?>

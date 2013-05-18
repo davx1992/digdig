@@ -14,7 +14,12 @@
             $coords[]=$coord;
         }
     } else {
-        $result = mysql_query("SELECT * FROM coordinates",$db);
+        $result = mysql_query("
+            SELECT *
+            FROM coordinates
+            RIGHT JOIN objects ON objects.id = coordinates.object_id
+            WHERE objects.description != ''
+            ",$db);
         $coords = array();
         while ($coord = mysql_fetch_assoc($result)){
             $object = mysql_query("SELECT `title` FROM objects WHERE objects.id = '".$coord['object_id']."'",$db);

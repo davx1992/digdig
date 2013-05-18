@@ -195,6 +195,16 @@
                     </a>
                 </div>
                 <br style="clear: both;"/>
+                <div class="views">
+                    <?php
+                        $views = mysql_query("
+                                SELECT COUNT(popularity.id) AS views
+                                FROM popularity
+                                WHERE popularity.object_id = '" . $object['id'] . "'");
+                        $count = mysql_fetch_array($views, MYSQL_ASSOC);
+                        echo 'Views: ' . $count['views'];
+                    ?>
+                </div>
             </div>
             <?php endwhile ?>
             <?php if ($objectCount == 0): ?>
